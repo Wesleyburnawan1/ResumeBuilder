@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\patel\\Source\\Repos\\ResumeBuilderNew\\ResumeBuilder\\ResumeBuilder.csproj",
+      "projectUniqueName": "C:\\Users\\patel\\Source\\Repos\\ResumeBuilder\\ResumeBuilder\\ResumeBuilder.csproj",
       "projectName": "ResumeBuilder",
-      "projectPath": "C:\\Users\\patel\\Source\\Repos\\ResumeBuilderNew\\ResumeBuilder\\ResumeBuilder.csproj",
+      "projectPath": "C:\\Users\\patel\\Source\\Repos\\ResumeBuilder\\ResumeBuilder\\ResumeBuilder.csproj",
       "packagesPath": "C:\\Users\\patel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\patel\\Source\\Repos\\ResumeBuilderNew\\ResumeBuilder\\obj\\",
+      "outputPath": "C:\\Users\\patel\\Source\\Repos\\ResumeBuilder\\ResumeBuilder\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\patel\\AppData\\Roaming\\NuGet\\NuGet.Config",

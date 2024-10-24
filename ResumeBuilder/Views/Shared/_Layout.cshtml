@@ -1,6 +1,53 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Full height of the viewport */
+        }
+
+        .sidebar-nav {
+            list-style-type: none; /* Remove bullets */
+            padding-left: 0; /* Remove default padding */
+        }
+
+            .sidebar-nav .nav-item {
+                margin: 10px 0; /* Space between nav items */
+            }
+
+        header {
+            flex: 0 0 auto; /* Header takes only the space it needs */
+        }
+
+        #sidebar {
+            background: #f8f9fa;
+            height: calc(100vh - 56px); /* Full height minus header height */
+            position: absolute; /* Fixed sidebar */
+            left: 0;
+            width: 250px;
+            top: 56px; /* Below the header */
+
+            overflow-y: auto; /* Scroll if needed */
+        }
+
+        .container {
+            margin-left: 250px; /* Margin to make room for the sidebar */
+            flex: 1; /* Fill the remaining space */
+            padding: 20px; /* Padding around the main content */
+        }
+
+        footer {
+            flex: 0 0 auto; /* Footer takes only the space it needs */
+            background: #f8f9fa; /* Match the sidebar background */
+            padding: 0; /* Padding for the footer */
+        }
+
+        .sidebar-nav .nav-item {
+            margin-top: 10px 0; /* Space between nav items */
+        }
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ResumeBuilder</title>
@@ -13,23 +60,58 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ResumeBuilder</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+                @* <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button> *@
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Login">Logout</a>
             </div>
+
         </nav>
     </header>
+    <aside id="sidebar" class="sidebar">
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="PersonalDetails">Personal Details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="WorkExperience">Work Experience</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Education">Education</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Testimonials">Testimonials</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Internships">Internships</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Projects">Projects</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Skills">Skills</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Certifications">Certifications</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Clienteles">Clienteles / Freelencing</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Messages">Messages</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Hobbies">Hobbies</a>
+            </li>
+
+        </ul>
+    </aside>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
