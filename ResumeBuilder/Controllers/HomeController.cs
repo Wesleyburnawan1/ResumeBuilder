@@ -22,6 +22,50 @@ public class HomeController : Controller
     {
         return View();
     }
+    public IActionResult Certifications()
+    {
+        return View();
+    }
+    public IActionResult Clienteles()
+    {
+        return View();
+    }
+    public IActionResult Education()
+    {
+        return View();
+    }
+    public IActionResult Hobbies()
+    {
+        return View();
+    }
+    public IActionResult Internships()
+    {
+        return View();
+    }
+    public IActionResult Messages()
+    {
+        return View();
+    }
+    public IActionResult PersonalDetails()
+    {
+        return View();
+    }
+    public IActionResult Projects()
+    {
+        return View();
+    }
+    public IActionResult Skills()
+    {
+        return View();
+    }
+    public IActionResult Testimonials()
+    {
+        return View();
+    }
+    public IActionResult WorkExperience()
+    {
+        return View();
+    }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
