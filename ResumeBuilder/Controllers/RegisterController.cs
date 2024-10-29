@@ -10,7 +10,7 @@ namespace ResumeBuilder.Controllers
         [HttpPost]
         public ActionResult Register(string email, string password)
         {
-            if (email == "admin" && password == "admin")
+            if (email == "admin@admin.com" && password == "admin")
             { 
                 return RedirectToAction("Index", "Home");
             }
