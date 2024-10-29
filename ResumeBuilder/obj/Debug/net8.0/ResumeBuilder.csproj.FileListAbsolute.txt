@@ -59,3 +59,34 @@ C:\Users\patel\Source\Repos\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\refint\
 C:\Users\patel\Source\Repos\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\ResumeBuilder.pdb
 C:\Users\patel\Source\Repos\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\ResumeBuilder.genruntimeconfig.cache
 C:\Users\patel\Source\Repos\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\ref\ResumeBuilder.dll
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\bin\Debug\net8.0\appsettings.json
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\bin\Debug\net8.0\ResumeBuilder.staticwebassets.runtime.json
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\bin\Debug\net8.0\ResumeBuilder.exe
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\bin\Debug\net8.0\ResumeBuilder.deps.json
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\bin\Debug\net8.0\ResumeBuilder.runtimeconfig.json
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\bin\Debug\net8.0\ResumeBuilder.dll
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\bin\Debug\net8.0\ResumeBuilder.pdb
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\ResumeBuilder.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\ResumeBuilder.AssemblyInfoInputs.cache
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\ResumeBuilder.AssemblyInfo.cs
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\ResumeBuilder.csproj.CoreCompileInputs.cache
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\ResumeBuilder.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\ResumeBuilder.RazorAssemblyInfo.cache
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\ResumeBuilder.RazorAssemblyInfo.cs
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\ResumeBuilder.sourcelink.json
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\staticwebassets\msbuild.ResumeBuilder.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\staticwebassets\msbuild.build.ResumeBuilder.props
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.ResumeBuilder.props
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.ResumeBuilder.props
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\scopedcss\bundle\ResumeBuilder.styles.css
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\scopedcss\projectbundle\ResumeBuilder.bundle.scp.css
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\ResumeBuilder.dll
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\refint\ResumeBuilder.dll
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\ResumeBuilder.pdb
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\ResumeBuilder.genruntimeconfig.cache
+C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder\ResumeBuilder\obj\Debug\net8.0\ref\ResumeBuilder.dll
