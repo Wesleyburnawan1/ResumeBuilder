@@ -54,6 +54,11 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    public IActionResult Login()
+    {
+        return View();
+    }
     public IActionResult Skills()
     {
         return View();
