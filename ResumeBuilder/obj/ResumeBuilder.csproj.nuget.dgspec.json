@@ -1,28 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\patel\\source\\repos\\ResumeBuilder\\ResumeBuilder\\ResumeBuilder.csproj": {}
+    "C:\\Users\\wesle\\Documents\\SE Tools\\Project\\Revised project\\ResumeBuilder\\ResumeBuilder\\ResumeBuilder.csproj": {}
   },
   "projects": {
-    "C:\\Users\\patel\\source\\repos\\ResumeBuilder\\ResumeBuilder\\ResumeBuilder.csproj": {
+    "C:\\Users\\wesle\\Documents\\SE Tools\\Project\\Revised project\\ResumeBuilder\\ResumeBuilder\\ResumeBuilder.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\patel\\source\\repos\\ResumeBuilder\\ResumeBuilder\\ResumeBuilder.csproj",
+        "projectUniqueName": "C:\\Users\\wesle\\Documents\\SE Tools\\Project\\Revised project\\ResumeBuilder\\ResumeBuilder\\ResumeBuilder.csproj",
         "projectName": "ResumeBuilder",
-        "projectPath": "C:\\Users\\patel\\source\\repos\\ResumeBuilder\\ResumeBuilder\\ResumeBuilder.csproj",
-        "packagesPath": "C:\\Users\\patel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\patel\\source\\repos\\ResumeBuilder\\ResumeBuilder\\obj\\",
+        "projectPath": "C:\\Users\\wesle\\Documents\\SE Tools\\Project\\Revised project\\ResumeBuilder\\ResumeBuilder\\ResumeBuilder.csproj",
+        "packagesPath": "C:\\Users\\wesle\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\wesle\\Documents\\SE Tools\\Project\\Revised project\\ResumeBuilder\\ResumeBuilder\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\patel\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\wesle\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -64,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.402/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
