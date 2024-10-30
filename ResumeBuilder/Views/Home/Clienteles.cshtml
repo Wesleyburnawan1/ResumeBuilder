@@ -5,8 +5,38 @@
     ViewData["Title"] = "Clienteles / Freelancing";
 
 }
-<div class="text-center">
-    <h1 class="display-4">Clienteles / Freelancing</h1>
-    <p>Learn about Adding Clienteles / Freelancing</p>
+<style>
+    label {
+        text-align: left;
+    }
+</style>
+<div class="text-left" style="margin-left:18%;">
+    <span style="font-size:40px;">Enter Your Clienteles here</span>
+    <div class="row mb-3">
+        <div class="col-sm-4">
+            <label class="col-sm-12 col-form-label">Name</label>
+            <input id="txtname" type="text" class="form-control" />
+        </div>
+        <div class="col-sm-4">
+            <label class="col-sm-12 col-form-label">Company Logo</label>
+            <input id="filecompanylogo" type="file" class="form-control" />
+        </div>
+        
+        <div class="col-sm-4">
+            <label class="col-sm-12 col-form-label">Website URL</label>
+            <input id="txtwebsiteurl" type="url" class="form-control" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-sm-12">
+            <label class="col-sm-12 col-form-label">Description</label>
+            <textarea id="txtdesc" type="text" class="form-control" rows="5" placeholder="Enter your description here"></textarea>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-sm-12">
+            <button type="submit" class="btn btn-primary" id="btnSUbmit" Style="float: right"> Submit</button>
+            <button type="submit" class="btn btn-primary" id="btnclear" Style="float: right; margin-right: 5px">Clear</button>
+        </div>
+    </div>
 </div>
-
