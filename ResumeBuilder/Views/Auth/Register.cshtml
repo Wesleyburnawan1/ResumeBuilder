@@ -1,0 +1,110 @@
+@{
+    Layout = null;
+    ViewBag.Title = "Login";
+}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0; /* Light background for contrast */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Full viewport height */
+        margin: 0;
+    }
+
+    #container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    #form {
+        width: 100%; /* Fixed width for consistency */
+    }
+
+    h2 {
+        color: #333; /* Darker text color */
+        margin-bottom: 20px;
+    }
+
+    label {
+        margin-bottom: 5px;
+        display: block; /* Make labels block elements */
+    }
+
+    input[type="email"],
+    input[type="password"] {
+        width: 100%; /* Full width inputs */
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        transition: border 0.3s; /* Smooth transition for focus */
+        margin-bottom: 15px;
+    }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #007BFF; /* Blue border on focus */
+            outline: none; /* Remove default outline */
+        }
+
+    input[type="submit"] {
+        background-color: #007BFF; /* Blue background */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        cursor: pointer; /* Pointer cursor on hover */
+        @* margin-top: 10px; *@
+        transition: background-color 0.3s; /* Smooth transition */
+        width: 100%; /* Full width button */
+    }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+    .error-message {
+        color: red;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .message {
+        text-align: center;
+        margin-top: 15px;
+    }
+</style>
+
+<div id="container">
+    <h2>Register</h2>
+
+
+    @using (Html.BeginForm("Register", "Auth", FormMethod.Post))
+    {
+        <div id="form">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required />
+
+            <input type="submit" value="Register" id="register" />
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="error-message">
+                    @TempData["ErrorMessage"]
+                </div>
+            }
+        </div>
+    }
+    <p class="message">Have an existing account? <a asp-area="" asp-controller="Home" asp-action="Login">Log in</a></p>
+</div>
