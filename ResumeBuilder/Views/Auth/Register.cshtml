@@ -14,7 +14,11 @@
     }
 
     #container {
-        text-align: left; /* Center the heading and form */
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
     }
 
     h2 {
@@ -22,13 +26,7 @@
     }
 
     #form {
-        padding: 20px;
-        background-color: #fff; /* White background for form */
-        border-radius: 10px;
-        border: 2px solid #ccc; /* Lighter border */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-        width: 300px; /* Fixed width for consistency */
-        margin: 0 auto; /* Center the form */
+        width: 100%; /* Fixed width for consistency */
     }
 
     h2 {
@@ -37,19 +35,18 @@
     }
 
     label {
-        font-weight: bold; /* Bold labels for clarity */
-        margin-top: 10px;
+        margin-bottom: 5px;
         display: block; /* Make labels block elements */
     }
 
-    input[type="text"],
+    input[type="email"],
     input[type="password"] {
         width: 100%; /* Full width inputs */
         padding: 10px;
-        margin-top: 5px;
         border: 1px solid #ccc;
-        border-radius: 5px;
+        border-radius: 4px;
         transition: border 0.3s; /* Smooth transition for focus */
+        margin-bottom: 15px;
     }
 
         input[type="text"]:focus,
@@ -65,7 +62,7 @@
         border-radius: 5px;
         padding: 10px;
         cursor: pointer; /* Pointer cursor on hover */
-        margin-top: 10px;
+        @* margin-top: 10px; *@
         transition: background-color 0.3s; /* Smooth transition */
         width: 100%; /* Full width button */
     }
