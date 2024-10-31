@@ -34,7 +34,7 @@ namespace ResumeBuilder.Controllers
             else
             {
                 TempData["ErrorMessage"] = "Invalid email or password.";
-                return RedirectToAction("Register", "Auth");
+                return RedirectToAction("Login", "Auth");
             }
         }
 

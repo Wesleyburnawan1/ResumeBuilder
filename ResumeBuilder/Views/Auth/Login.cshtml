@@ -57,6 +57,11 @@
         button:hover {
             background-color: #0056b3;
         }
+        .error-message {
+        color: red;
+        text-align: center;
+        margin-top: 10px;
+    }
 
     .message {
         text-align: center;
@@ -75,6 +80,12 @@
             <input type="password" id="password" name="password" required>
         </div>
         <button type="submit">Login</button>
+  @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="error-message">
+                    @TempData["ErrorMessage"]
+                </div>
+            }
     </form>
     <p class="message">Don't have an account? <a asp-area="" asp-controller="Auth" asp-action="Register">Sign up</a></p>
 </div>
