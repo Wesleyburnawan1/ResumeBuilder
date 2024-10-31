@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 namespace ResumeBuilder.Controllers
 {
-    public class RegisterController : Controller
+    public class AuthController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Register()
         {
             return View();
         }
@@ -17,7 +17,7 @@ namespace ResumeBuilder.Controllers
             else
             {
                 TempData["ErrorMessage"] = "Invalid email or password.";
-                return RedirectToAction("Register", "Home");
+                return RedirectToAction("Register", "Auth");
             } 
         }
     }
