@@ -57,7 +57,7 @@ namespace ResumeBuilder.Controllers
                 if (existingUser != null)
                 {
                     TempData["ErrorMessage"] = "Email already Registered";
-                    return RedirectToAction("Registerr", "Auth");
+                    return RedirectToAction("Registerrr", "Auth");
                 }
 
                 // Hash the password
