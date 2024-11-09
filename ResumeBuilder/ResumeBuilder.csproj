@@ -15,10 +15,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-<<<<<<< HEAD
-=======
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.10" />
->>>>>>> CI-CD-playground
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
     <PackageReference Include="Moq" Version="4.20.72" />
     <PackageReference Include="xunit" Version="2.9.2" />
