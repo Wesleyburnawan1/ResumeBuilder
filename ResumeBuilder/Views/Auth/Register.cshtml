@@ -1,7 +1,9 @@
 @{
     Layout = null;
     ViewBag.Title = "Login";
-}
+} 
+@model ResumeBuilder.Controllers.AuthController.RegisterModel
+
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -92,9 +94,10 @@
         <div id="form">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required />
-
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "error-message" })
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required />
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error-message" }) <!-- Password validation error -->
 
             <input type="submit" value="Register" id="register" />
 
