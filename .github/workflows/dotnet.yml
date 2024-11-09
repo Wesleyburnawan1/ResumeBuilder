@@ -7,9 +7,7 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-    branches:
-    - "main"
-    - "CI-CD-playground"
+    branches: [ "main" ]
 
 jobs:
   build:
