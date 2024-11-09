@@ -1,7 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Login Page";
 }
-@{ Layout = null; }
+@{
+    Layout = null;
+}
 
 <style>
     body {
@@ -57,7 +59,8 @@
         button:hover {
             background-color: #0056b3;
         }
-        .error-message {
+
+    .error-message {
         color: red;
         text-align: center;
         margin-top: 10px;
@@ -70,22 +73,23 @@
 </style>
 <div class="container">
     <h2>Login</h2>
-    <form action="#" method="POST">
-        <div class="input-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
+    @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+    {
+                <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
         </div>
         <div class="input-group">
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required>
         </div>
         <button type="submit">Login</button>
-  @if (TempData["ErrorMessage"] != null)
-            {
-                <div class="error-message">
-                    @TempData["ErrorMessage"]
-                </div>
-            }
-    </form>
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="error-message">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+    }
     <p class="message">Don't have an account? <a asp-area="" asp-controller="Auth" asp-action="Register">Sign up</a></p>
 </div>
