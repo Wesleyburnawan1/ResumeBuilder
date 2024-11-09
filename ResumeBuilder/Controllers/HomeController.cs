@@ -13,16 +13,30 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(string email)
     {
+        // First, check if the email exists in the session
+        string userEmail = HttpContext.Session.GetString("Email");
+
+        // If no email found in session and query string is empty, redirect to login page
+        if (string.IsNullOrEmpty(userEmail) && string.IsNullOrEmpty(email))
+        {
+            return RedirectToAction("Login", "Account");
+        }
+
+        // If the email is found in the session, use it; otherwise, fallback to the query string
+        if (string.IsNullOrEmpty(userEmail) && !string.IsNullOrEmpty(email))
+        {
+            userEmail = email; // Take email from the query string
+        }
+
+        // You can pass the email to the view or use it for other purposes
+        ViewBag.UserEmail = userEmail;
+
         return View();
     }
 
-    public IActionResult Register()
-    {
-        return View();
-    }
-
+    
     public IActionResult Privacy()
     {
         return View();
