@@ -20,8 +20,8 @@ builder.Services.AddSession(options =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Account/Login"; // Define login path
-        options.LogoutPath = "/Account/Logout"; // Define logout path
+        options.LoginPath = "/Auth/Login"; // Define login path
+        options.LogoutPath = "/Auth/Logout"; // Define logout path
     });
 var app = builder.Build();
 
@@ -54,6 +54,6 @@ app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Auth}/{action=Login}/{id?}");
 
 app.Run();
