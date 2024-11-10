@@ -34,16 +34,13 @@ namespace ResumeBuilder.Controllers
         public class RegisterModel
         {
             public string Email { get; set; }
+
             [Required]
             [StringLength(100, MinimumLength = 8, ErrorMessage = "Password must be at least 8 characters long.")]
-            [RegularExpression(@"^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.\W).+$", ErrorMessage = "Password must contain at least one uppercase letter, one lowercase letter,one number and one special character.")]
+            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).+$", ErrorMessage = "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.")]
             public string Password { get; set; }
 
-            public RegisterModel(string email, string password)
-            {
-                Email = email;
-                Password = password;
-            }
+            // Parameterless constructor is automatically provided by the compiler, no need to explicitly define it.
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -56,7 +53,7 @@ namespace ResumeBuilder.Controllers
                 if (existingUser != null)
                 {
                     TempData["ErrorMessage"] = "Email already Registered";
-                    return RedirectToAction("Register", "Auth");
+                    return RedirectToAction("Registerr", "Auth");
                 }
 
                 // Hash the password
