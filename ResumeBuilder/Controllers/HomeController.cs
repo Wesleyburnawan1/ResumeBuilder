@@ -45,23 +45,7 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult Clienteles()
-    {
-        return View();
-    }
     public IActionResult Education()
-    {
-        return View();
-    }
-    public IActionResult Hobbies()
-    {
-        return View();
-    }
-    public IActionResult Internships()
-    {
-        return View();
-    }
-    public IActionResult Messages()
     {
         return View();
     }
@@ -79,10 +63,6 @@ public class HomeController : Controller
         return View();
     }
     public IActionResult Skills()
-    {
-        return View();
-    }
-    public IActionResult Testimonials()
     {
         return View();
     }
