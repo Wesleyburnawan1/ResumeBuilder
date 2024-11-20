@@ -1,6 +1,9 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ResumeBuilder.Models;
+using QRCoder;
+using static QRCoder.PayloadGenerator;
+using System.Drawing;
 
 namespace ResumeBuilder.Controllers;
 
@@ -14,31 +17,59 @@ public class HomeController : Controller
     }
 
     public IActionResult Index(string email)
-    {
-        // First, check if the email exists in the session
-        string userEmail = HttpContext.Session.GetString("Email");
-
-        // If no email found in session and query string is empty, redirect to login page
+    { 
+        string userEmail = HttpContext.Session.GetString("Email"); 
         if (string.IsNullOrEmpty(userEmail) && string.IsNullOrEmpty(email))
         {
             return RedirectToAction("Login", "Account");
-        }
-
-        // If the email is found in the session, use it; otherwise, fallback to the query string
+        } 
         if (string.IsNullOrEmpty(userEmail) && !string.IsNullOrEmpty(email))
         {
-            userEmail = email; // Take email from the query string
-        }
-
-        // You can pass the email to the view or use it for other purposes
+            userEmail = email; 
+            TempData["Email"] = email; 
+        } 
         ViewBag.UserEmail = userEmail;
-
+        TempData["Email"] = email;
         return View();
     }
 
-    
+    [HttpGet]
+    public IActionResult GenerateQRCode()
+    {
+        try
+        { 
+            string email = HttpContext.Session.GetString("Email"); // Retrieve email from session
+            string QRString = Url.Action("ResumeView", "Home", new { email = email }, Request.Scheme);
+
+            using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
+            {
+                QRCodeData qrCodeData = qrGenerator.CreateQrCode(QRString, QRCodeGenerator.ECCLevel.Q);
+                PngByteQRCode pngByteQRCode = new PngByteQRCode(qrCodeData); 
+                byte[] qrCodeImage = pngByteQRCode.GetGraphic(5); 
+                return File(qrCodeImage, "image/png");
+            }
+        }
+        catch (Exception ex)
+        {
+            return Content($"Error generating QR Code: {ex.Message}");
+        }
+    }
     public IActionResult Privacy()
     {
+        return View();
+    }
+    public IActionResult ResumeView()
+    { 
+        string sessionemail = HttpContext.Session.GetString("Email");
+        string requestemail = Request.Query["email"]; 
+        if(requestemail != sessionemail)
+        {
+           requestemail  = sessionemail; 
+            TempData["Email"] = requestemail;
+        }
+        ViewData["Email"] = sessionemail;
+        TempData["Email"] = requestemail;
+
         return View();
     }
     public IActionResult Certifications()
@@ -60,6 +91,8 @@ public class HomeController : Controller
 
     public IActionResult Login()
     {
+        HttpContext.Session.Clear();
+
         return View();
     }
     public IActionResult Skills()

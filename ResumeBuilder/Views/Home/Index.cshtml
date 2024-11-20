@@ -3,6 +3,14 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>User will see QR Code and ID Card Herecd </p>
+    <h2>Dashboard</h2>
+
+    <!-- Display the QR Code -->
+    <div>
+        <h3>QR Code of Resume</h3>
+        <img src="/Home/GenerateQRCode" alt="QR Code for View Resume" />
+    </div>
+    <div>
+        <a class="navbar-brand" asp-controller="Home" asp-action="ResumeView" asp-route-email="@TempData["Email"]">View Resume</a>
+    </div>
 </div>
