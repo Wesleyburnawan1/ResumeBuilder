@@ -11,6 +11,9 @@
         <img src="/Home/GenerateQRCode" alt="QR Code for View Resume" />
     </div>
     <div>
-        <a class="navbar-brand" asp-controller="Home" asp-action="ResumeView" asp-route-email="@TempData["Email"]">View Resume</a>
+        <form asp-controller="Home" asp-action="ResumeView" method="get">
+            <input type="hidden" name="email" value="@TempData["Email"]" />
+            <button type="submit" class="btn btn-primary">View Resume</button>
+        </form>
     </div>
 </div>
