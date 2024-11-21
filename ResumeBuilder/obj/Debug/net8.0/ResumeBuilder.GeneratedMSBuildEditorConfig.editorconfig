@@ -18,20 +18,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\shubhangi nakrani\ResumeBuilder\ResumeBuilder
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/shubhangi nakrani/ResumeBuilder/ResumeBuilder/Views/Auth/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/shubhangi nakrani/ResumeBuilder/ResumeBuilder/Views/Auth/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/shubhangi nakrani/ResumeBuilder/ResumeBuilder/Views/Home/Certifications.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDZXJ0aWZpY2F0aW9ucy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/shubhangi nakrani/ResumeBuilder/ResumeBuilder/Views/Home/Clienteles.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDbGllbnRlbGVzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/shubhangi nakrani/ResumeBuilder/ResumeBuilder/Views/Home/Education.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFZHVjYXRpb24uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/shubhangi nakrani/ResumeBuilder/ResumeBuilder/Views/Home/Hobbies.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIb2JiaWVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/shubhangi nakrani/ResumeBuilder/ResumeBuilder/Views/Home/Index.cshtml]
@@ -40,14 +40,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/shubhangi nakrani/ResumeBuilder/ResumeBuilder/Views/Home/Internships.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbnRlcm5zaGlwcy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/shubhangi nakrani/ResumeBuilder/ResumeBuilder/Views/Home/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/shubhangi nakrani/ResumeBuilder/ResumeBuilder/Views/Home/Messages.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNZXNzYWdlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/shubhangi nakrani/ResumeBuilder/ResumeBuilder/Views/Home/PersonalDetails.cshtml]
@@ -62,12 +54,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcm9qZWN0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/shubhangi nakrani/ResumeBuilder/ResumeBuilder/Views/Home/Skills.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTa2lsbHMuY3NodG1s
+[C:/Users/shubhangi nakrani/ResumeBuilder/ResumeBuilder/Views/Home/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/shubhangi nakrani/ResumeBuilder/ResumeBuilder/Views/Home/Testimonials.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZXN0aW1vbmlhbHMuY3NodG1s
+[C:/Users/shubhangi nakrani/ResumeBuilder/ResumeBuilder/Views/Home/Skills.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTa2lsbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/shubhangi nakrani/ResumeBuilder/ResumeBuilder/Views/Home/WorkExperience.cshtml]
