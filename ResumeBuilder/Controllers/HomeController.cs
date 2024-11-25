@@ -91,6 +91,25 @@ public class HomeController : Controller
     {
         return View();
     }
+      [HttpPost]
+    public async Task<IActionResult> SubmitSkills(Skills model)
+    {
+        if (ModelState.IsValid)
+        {
+
+            int? userID = HttpContext.Session.GetInt32("UserID");
+            model.UserID = userID.Value;  // Assign the UserID from session to the model
+
+            _context.Skills.Add(model);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");  // Redirect to Home or other success page
+        }
+
+        return View("Index");
+    }
+
+  
+
     public IActionResult WorkExperience()
     {
         return View();
