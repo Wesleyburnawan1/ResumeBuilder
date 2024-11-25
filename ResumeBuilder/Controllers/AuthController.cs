@@ -9,8 +9,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.Cookies;
-
+using Microsoft.AspNetCore.Authentication.Cookies; 
 using System.Security.Claims;
 using System.ComponentModel.DataAnnotations;
 

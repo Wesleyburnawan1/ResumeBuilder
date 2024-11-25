@@ -82,6 +82,23 @@ public class HomeController : Controller
     {
         return View();
     }
+ [HttpPost]
+    public async Task<IActionResult> SubmitProjects(Projects model)
+    {
+        if (ModelState.IsValid)
+        {
+
+            int? userID = HttpContext.Session.GetInt32("UserID");
+            model.UserID = userID.Value;  // Assign the UserID from session to the model
+
+            _context.Projects.Add(model);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");  // Redirect to Home or other success page
+        }
+
+        return View("Index");
+    }
+
 
     public IActionResult Login()
     {
