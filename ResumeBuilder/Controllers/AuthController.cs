@@ -103,7 +103,7 @@ namespace ResumeBuilder.Controllers
                     if (verificationResult == PasswordVerificationResult.Success)
                     {
                         HttpContext.Session.SetString("Email", user.Email);
-
+                        HttpContext.Session.SetInt32("UserID", user.UserID);
                         return RedirectToAction("Index", "Home", new { email = user.Email });
                     }
                 }

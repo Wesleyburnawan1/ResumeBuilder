@@ -1,17 +1,25 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+
+
+using Microsoft.EntityFrameworkCore;
+using ResumeBuilder.Data;
+using ResumeBuilder.Models;
+
 using ResumeBuilder.Models;
 
 namespace ResumeBuilder.Controllers;
 
 public class HomeController : Controller
-{
-    private readonly ILogger<HomeController> _logger;
+{private readonly ILogger<HomeController> _logger;
+    private readonly ApplicationDbContext _context;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
     {
         _logger = logger;
+        _context = context;
     }
+
 
     public IActionResult Index(string email)
     {
@@ -49,6 +57,23 @@ public class HomeController : Controller
     {
         return View();
     }
+        [HttpPost]
+    public async Task<IActionResult> SubmitEducation(Education model)
+    {
+        if (ModelState.IsValid)
+        {
+
+            int? userID = HttpContext.Session.GetInt32("UserID");
+            model.UserID = userID.Value;  // Assign the UserID from session to the model
+
+            _context.Education.Add(model);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");  // Redirect to Home or other success page
+        }
+
+        return View("Index");
+    }
+
     public IActionResult PersonalDetails()
     {
         return View();
