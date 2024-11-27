@@ -1,12 +1,55 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ResumeBuilder.Models.UserDetails
+
 @{
-    ViewData["Title"] = "Personal Details";
-
+    ViewData["Title"] = "PersonalDetails";
 }
-<div class="text-center">
-    <h1 class="display-4">Personal Details</h1>
-    <p>Learn about Adding Personal Details</p>
-</div>
 
+<style>
+    label {
+        text-align: left;
+    }
+</style>
+
+<div class="text-left" style="margin-left:18%;">
+    <span style="font-size:40px;">Enter Your Personal Details here</span>
+    <form method="post" asp-action="SubmitPersonalDetails" id="form">
+        <div>
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <label class="col-sm-12 col-form-label">First Name</label>
+                    <input id="txtfirstname" type="text" class="form-control" name="FirstName" value="@Model.FirstName" />
+                </div>
+                <div class="col-sm-4">
+                    <label class="col-sm-12 col-form-label">Last Name</label>
+                    <input id="txtlastname" type="text" class="form-control" name="LastName" value="@Model.LastName" />
+                </div>
+
+                <div class="col-sm-4">
+                    <label class="col-sm-12 col-form-label">Email</label>
+                    <input id="txtemail" type="text" class="form-control" name="email" readonly value="@ViewData["Email"]" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <label class="col-sm-12 col-form-label">Address</label>
+                    <textarea id="txtaddress" type="text" class="form-control" rows="5" name="Address" placeholder="Enter your Address here">@Model.Address</textarea>
+
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-primary" style="float: right">Submit</button>
+                    <button type="button" onclick="clearForm('form')" class="btn btn-primary" style="float: right; margin-right: 5px">Clear</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function clearForm(formId) {
+        var form = document.getElementById(formId);
+        if (form) {
+            form.reset();
+        }
+    }
+</script>

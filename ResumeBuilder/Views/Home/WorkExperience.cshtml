@@ -10,7 +10,7 @@
 </style>
 <div class="text-left" style="margin-left:18%;">
     <span style="font-size:40px;">Enter Your Work Experiences here</span>
-    <form method="post" asp-action="SubmitWorkExperience">
+    <form method="post" asp-action="SubmitWorkExperience" id="WorkExperienceForm">
 
         <div class="row mb-3">
             <div class="col-sm-6">
@@ -42,8 +42,16 @@
         <div class="row mb-3">
             <div class="col-sm-12">
                 <button type="submit" class="btn btn-primary" style="float: right">Submit</button>
-                <button type="reset" class="btn btn-primary" style="float: right; margin-right: 5px">Clear</button>
+                <button type="button" onclick="clearForm('WorkExperienceForm')" class="btn btn-primary" style="float: right; margin-right: 5px">Clear</button>
             </div>
         </div>
     </form>
 </div>
+<script type="text/javascript">
+    function clearForm(formId) {
+        var form = document.getElementById(formId);
+        if (form) {
+            form.reset();
+        }
+    }
+</script>

@@ -10,7 +10,7 @@
 </style>
 <div class="text-left" style="margin-left:18%;">
     <span style="font-size:40px;">Enter Your Project Details here</span>
-        <form method="post" asp-action="SubmitProjects">
+        <form method="post" asp-action="SubmitProjects" id="ProjectsForm">
 
     <div class="row mb-3">
         <div class="col-sm-6">
@@ -42,8 +42,17 @@
     <div class="row mb-3">
         <div class="col-sm-12">
             <button type="submit" class="btn btn-primary" id="btnSUbmit" Style="float: right"> Submit</button>
-            <button type="submit" class="btn btn-primary" id="btnclear" Style="float: right; margin-right: 5px">Clear</button>
-        </div>
+                <button type="button" onclick="clearForm('ProjectsForm')" class="btn btn-primary" style="float: right; margin-right: 5px">Clear</button>
+            </div>
     </div>
     </form>
 </div>
+
+<script type="text/javascript">
+    function clearForm(formId) {
+        var form = document.getElementById(formId);
+        if (form) {
+            form.reset();
+        }
+    }
+</script>

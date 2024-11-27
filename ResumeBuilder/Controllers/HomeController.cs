@@ -122,11 +122,65 @@ public class HomeController : Controller
 
         return View("Index");
     }
-
     public IActionResult PersonalDetails()
     {
-        return View();
+        int? userId = HttpContext.Session.GetInt32("UserID");
+
+        if (userId == null)
+        {
+            // Handle the case where UserID is not available in session (e.g., redirect to login page)
+            return RedirectToAction("Login", "Account"); // Example, adjust as per your login flow
+        }
+
+        // Retrieve the user's details from the database using the UserID from the session
+        var userDetails = _context.UserDetails.FirstOrDefault(u => u.UserID == userId);
+
+        if (userDetails == null)
+        {
+            userDetails = new UserDetails(); // If no data found, create a new empty model
+        }
+        ViewData["Email"] = HttpContext.Session.GetString("Email");
+
+        return View(userDetails);
+
     }
+    [HttpPost]
+    public IActionResult SubmitPersonalDetails(UserDetails userDetails)
+    {
+        // Retrieve UserID from session
+        int? userId = HttpContext.Session.GetInt32("UserID");
+
+        if (userId == null)
+        {
+            // Redirect to login if UserID is not in session
+            return RedirectToAction("Login", "Account");
+        }
+
+        if (ModelState.IsValid)
+        {
+            var existingUser = _context.UserDetails.FirstOrDefault(u => u.UserID == userId);
+            if (existingUser != null)
+            {
+                // Update existing user details
+                existingUser.FirstName = userDetails.FirstName;
+                existingUser.LastName = userDetails.LastName;
+                existingUser.Address = userDetails.Address;
+            }
+            else
+            {
+                // Add new user details (though in your case this might not happen often)
+                userDetails.UserID = userId.Value; // Ensure UserID is set
+                _context.UserDetails.Add(userDetails);
+            }
+
+            _context.SaveChanges(); // Save changes to the database
+            return RedirectToAction("PersonalDetails"); // Redirect back to PersonalDetails page
+        }
+
+        // If model state is invalid (e.g., validation errors), return the form with the user details for correction
+        return View(userDetails);
+    }
+
     public IActionResult Projects()
     {
         return View();
