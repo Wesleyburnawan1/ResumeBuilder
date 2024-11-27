@@ -13,7 +13,7 @@
 
 <div class="text-left" style="margin-left:18%;">
     <span style="font-size:40px;">Enter Your Educational Details here</span>
-    <form method="post" asp-action="SubmitEducation">
+    <form method="post" asp-action="SubmitEducation" id="EducationalForm">
         <div>
             <div class="row mb-3">
                 <div class="col-sm-6">
@@ -43,7 +43,8 @@
             <div class="row mb-3">
                 <div class="col-sm-12">
                     <button type="submit" class="btn btn-primary" style="float: right">Submit</button>
-                    <button type="submit" class="btn btn-primary" asp-action="ClearForm" style="float: right; margin-right: 5px">Clear</button>
+                    <button type="button" onclick="clearForm('EducationalForm')" class="btn btn-primary" style="float: right; margin-right: 5px">Clear</button>
+
                 </div>
             </div>
         </div>
@@ -51,3 +52,11 @@
 </div>
 
 
+<script type="text/javascript">
+    function clearForm(formId) {
+        var form = document.getElementById(formId);
+        if (form) {
+            form.reset();
+        }
+    }
+</script>

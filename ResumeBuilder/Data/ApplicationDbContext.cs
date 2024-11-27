@@ -16,7 +16,9 @@ namespace ResumeBuilder.Data
          public DbSet<WorkExperience> WorkExperience { get; set; }
         public DbSet<Projects> Projects { get; set; }
         public DbSet<Certifications> Certifications { get; set; }
+        public DbSet<UserDetails> UserDetails { get; set; }
 
-        
+
+
     }
 }
