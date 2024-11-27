@@ -9,8 +9,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.Cookies;
-
+using Microsoft.AspNetCore.Authentication.Cookies; 
 using System.Security.Claims;
 using System.ComponentModel.DataAnnotations;
 
@@ -103,7 +102,7 @@ namespace ResumeBuilder.Controllers
                     if (verificationResult == PasswordVerificationResult.Success)
                     {
                         HttpContext.Session.SetString("Email", user.Email);
-
+                        HttpContext.Session.SetInt32("UserID", user.UserID);
                         return RedirectToAction("Index", "Home", new { email = user.Email });
                     }
                 }

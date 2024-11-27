@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ResumeBuilder.Models.Projects
 @{
     ViewData["Title"] = "Projects";
 
@@ -12,31 +10,33 @@
 </style>
 <div class="text-left" style="margin-left:18%;">
     <span style="font-size:40px;">Enter Your Project Details here</span>
+        <form method="post" asp-action="SubmitProjects">
+
     <div class="row mb-3">
         <div class="col-sm-6">
             <label class="col-sm-12 col-form-label">Project Name</label>
-            <input id="txtprojectname" type="text" class="form-control" />
+            <input id="txtprojectname" name="Name" type="text" class="form-control" />
         </div>
         <div class="col-sm-6">
             <label class="col-sm-12 col-form-label">Role</label>
-            <input id="txtrole" type="text" class="form-control" />
+            <input id="txtrole" type="text" name="Role" class="form-control" />
         </div>
     </div>
     <div class="row mb-3 d-flex justify-content-between">
         <div class="col-sm-5">
             <label class="col-sm-12 col-form-label">Start Date</label>
-            <input id="txtstartdate" type="date" class="form-control" />
+            <input id="txtstartdate" type="date" name="StartDate" class="form-control" />
         </div>
 
         <div class="col-sm-5">
             <label class="col-sm-12 col-form-label">End Date</label>
-            <input id="txtenddate" type="date" class="form-control" />
+            <input id="txtenddate" type="date" class="form-control" name="EndDate" />
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-sm-12">
             <label class="col-sm-12 col-form-label">Description</label>
-            <textarea id="txtdesc" type="text" class="form-control" rows="5" placeholder="Enter your description here"></textarea>
+            <textarea id="txtdesc" type="text" class="form-control" rows="5" name="Description" placeholder="Enter your description here"></textarea>
         </div>
     </div>
     <div class="row mb-3">
@@ -45,9 +45,5 @@
             <button type="submit" class="btn btn-primary" id="btnclear" Style="float: right; margin-right: 5px">Clear</button>
         </div>
     </div>
+    </form>
 </div>
-
-
-
-
-

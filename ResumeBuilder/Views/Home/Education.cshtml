@@ -1,59 +1,53 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
+@model ResumeBuilder.Models.Education
 
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?Linkid=397860
-*@
 @{
     ViewData["Title"] = "Education";
-
 }
+
 <style>
     label {
         text-align: left;
     }
 </style>
+
 <div class="text-left" style="margin-left:18%;">
     <span style="font-size:40px;">Enter Your Educational Details here</span>
-    <div>
-        <div class="row mb-3">
-            <div class="col-sm-6">
-                <label class="col-sm-12 col-form-label">Name of Institution</label>
-                <input id="txtinstitutename" type="text" class="form-control" />
+    <form method="post" asp-action="SubmitEducation">
+        <div>
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <label class="col-sm-12 col-form-label">Name of Institution</label>
+                    <input id="txtinstitutename" type="text" class="form-control" name="InstituteName" />
+                </div>
+                <div class="col-sm-6">
+                    <label class="col-sm-12 col-form-label">Degree</label>
+                    <input id="txtdegree" type="text" class="form-control" name="Degree" />
+                </div>
             </div>
-            <div class="col-sm-6">
-                <label class="col-sm-12 col-form-label">Degree</label>
-                <input id="txtlocation" type="text" class="form-control" />
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <label class="col-sm-12 col-form-label">Starting Year</label>
+                    <input id="txtstartingdate" type="number" class="form-control" name="StartingYear" />
+                </div>
+                <div class="col-sm-3">
+                    <label class="col-sm-12 col-form-label">Graduation Year</label>
+                    <input id="txtendingdate" type="number" class="form-control" name="EndingYear" />
+                </div>
+                <div class="col-sm-3">
+                    <label class="col-sm-12 col-form-label">GPA</label>
+                    <input id="txtgpa" class="form-control" name="GPA" />
+                </div>
+                 
             </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-sm-3">
-                <label class="col-sm-12 col-form-label">Starting Year</label>
-                <input id="txtstartdate" type="date" class="form-control" />
-            </div>
-            <div class="col-sm-3">
-                <label class="col-sm-12 col-form-label">Graduation Year</label>
-                <input id="txtstartdate" type="date" class="form-control" />
-            </div>
-            <div class="col-sm-3">
-                <label for="inputNumber" class="col-sm-12 col-form-label">GPA</label>
-                <input id="txtgpa" class="form-control" />
-
-            </div>
-
-            <div class="col-sm-3">
-                <label for="inputNumber" class="col-sm-12 col-form-label">Location</label>
-                <input type="text" id="txtdegree" class="form-control" />
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-sm-12">
-
-                <button type="submit" class="btn btn-primary" id="btnSUbmit" Style="float: right"> Submit</button>
-                <button type="submit" class="btn btn-primary" id="btnclear" Style="float: right; margin-right: 5px">Clear</button>
+            <div class="row mb-3">
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-primary" style="float: right">Submit</button>
+                    <button type="submit" class="btn btn-primary" asp-action="ClearForm" style="float: right; margin-right: 5px">Clear</button>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
+
 
