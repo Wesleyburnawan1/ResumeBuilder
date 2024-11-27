@@ -1,5 +1,4 @@
-﻿
-@model ResumeBuilder.Models.Education
+﻿@model IEnumerable<ResumeBuilder.Models.Education>
 
 @{
     ViewData["Title"] = "Education";
@@ -38,7 +37,7 @@
                     <label class="col-sm-12 col-form-label">GPA</label>
                     <input id="txtgpa" class="form-control" name="GPA" />
                 </div>
-                 
+
             </div>
             <div class="row mb-3">
                 <div class="col-sm-12">
@@ -49,6 +48,45 @@
             </div>
         </div>
     </form>
+
+    <table class="table table-bordered table-striped">
+        <tbody>
+        <thead>
+            <tr>
+                <th>Name of Institution</th>
+                <th>Degree</th>
+                <th>Starting Year</th>
+                <th>Graduation Year</th>
+                <th>GPA</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+            @if (Model == null || !Model.Any())
+            {
+            <tr>
+                <td colspan="7" class="text-center">No education records found.</td>
+            </tr>
+            }
+            else
+            {
+                @foreach (var education in Model)
+                {
+                <tr>
+                    <td>@education.InstituteName</td>
+                    <td>@education.Degree</td>
+                    <td>@education.StartingYear</td>
+                    <td>@education.EndingYear</td>
+                    <td>@education.GPA</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Users", new { id = education.EducationID })" class="btn btn-primary">Edit</a>
+                        <a href="@Url.Action("Delete", "Users", new { id = education.EducationID })" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+
 </div>
 
 
