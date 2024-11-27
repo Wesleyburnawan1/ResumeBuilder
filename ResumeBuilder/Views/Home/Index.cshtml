@@ -3,6 +3,17 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>User will see QR Code and ID Card Herecd </p>
+    <h2>Dashboard</h2>
+
+    <!-- Display the QR Code -->
+    <div>
+        <h3>QR Code of Resume</h3>
+        <img src="/Home/GenerateQRCode" alt="QR Code for View Resume" />
+    </div>
+    <div>
+        <form asp-controller="Home" asp-action="ResumeView" method="get">
+            <input type="hidden" name="email" value="@TempData["Email"]" />
+            <button type="submit" class="btn btn-primary">View Resume</button>
+        </form>
+    </div>
 </div>
