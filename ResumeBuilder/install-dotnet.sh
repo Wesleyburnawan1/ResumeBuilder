@@ -12,5 +12,9 @@ dotnet --version
 # Publish the application
 dotnet publish -c Release -o ./publish
 
+# List contents of the publish folder to verify the output
+echo "Contents of publish folder:"
+ls -al ./publish
+
 # Start the application
 dotnet ./publish/YourApp.dll
