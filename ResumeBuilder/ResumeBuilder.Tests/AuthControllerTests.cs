@@ -40,7 +40,11 @@ namespace ResumeBuilder.Tests
             var tempData = new Mock<ITempDataDictionary>();
             controller.TempData = tempData.Object;
 
-            var model = new AuthController.RegisterModel("test@example.com", "Password123!");
+            var model = new AuthController.RegisterModel
+            {
+                Email = "test@example.com",
+                Password = "Password123!"
+            };
 
             // Act
             var result = await controller.Register(model);
@@ -64,7 +68,11 @@ namespace ResumeBuilder.Tests
             var tempData = new Mock<ITempDataDictionary>();
             controller.TempData = tempData.Object;
 
-            var model = new AuthController.RegisterModel("test@example.com", "Password123!");
+            var model = new AuthController.RegisterModel
+            {
+                Email = "test@example.com",
+                Password = "Password123!"
+            };
 
             // Act
             var result = await controller.Register(model);
@@ -90,7 +98,11 @@ namespace ResumeBuilder.Tests
             var tempData = new Mock<ITempDataDictionary>();
             controller.TempData = tempData.Object;
 
-            var model = new AuthController.RegisterModel("test@example.com", "Password123!");
+            var model = new AuthController.RegisterModel
+            {
+                Email = "test@example.com",
+                Password = "Password123!"
+            };
 
             // Act
             var result = await controller.Register(model);
