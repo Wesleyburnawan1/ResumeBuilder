@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Download and install .NET runtime
-curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 7.0
+# Install .NET 8.0 SDK
+curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 8.0
 
 # Add .NET to the PATH
 export PATH="$HOME/.dotnet:$PATH"
