@@ -11,6 +11,3 @@ dotnet --version
 
 # Publish the application
 dotnet publish -c Release -o ./publish
-
-# Start the application
-dotnet ./publish/ResumeBuilder.dll
