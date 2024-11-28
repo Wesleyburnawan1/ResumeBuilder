@@ -61,6 +61,7 @@
                 <th>Actions</th>
             </tr>
         </thead>
+        <tbody>
             @if (Model == null || !Model.Any())
             {
             <tr>
@@ -78,8 +79,7 @@
                     <td>@education.EndingYear</td>
                     <td>@education.GPA</td>
                     <td>
-                        <a href="@Url.Action("Edit", "Users", new { id = education.EducationID })" class="btn btn-primary">Edit</a>
-                        <a href="@Url.Action("Delete", "Users", new { id = education.EducationID })" class="btn btn-danger">Delete</a>
+                        <a href="@Url.Action("Delete", "Home", new { entityType = "education", id = education.EducationID })" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
                 }
