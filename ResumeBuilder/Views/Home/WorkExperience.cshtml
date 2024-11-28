@@ -72,8 +72,8 @@
                         <td>@WorkExperience.CompanyName</td>
 
                         <td>@WorkExperience.Title</td>
-                        <td>@WorkExperience.StartDate</td>
-                        <td>@WorkExperience.EndDate</td>
+                        <td>@WorkExperience.StartDate.ToString("yyyy-MM-dd")</td>
+                        <td>@WorkExperience.EndDate.ToString("yyyy-MM-dd")</td>
                         <td>
                             <a href="@Url.Action("Delete", "Home", new { entityType = "workexperience", id = WorkExperience.WorkExperienceID})" class="btn btn-danger">Delete</a>
                         </td>
