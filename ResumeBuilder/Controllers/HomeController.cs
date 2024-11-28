@@ -24,6 +24,63 @@ public class HomeController : Controller
         _context = context;
     }
 
+    [HttpGet]
+    public IActionResult Delete(string entityType, int id)
+    {
+        object entity = null;
+
+        switch (entityType.ToLower())
+        {
+            case "education":
+                entity = _context.Education.FirstOrDefault(e => e.EducationID == id);
+                break;
+            case "project":
+                entity = _context.Projects.FirstOrDefault(p => p.ProjectID == id);
+                break;
+            case "certification":
+                entity = _context.Certifications.FirstOrDefault(c => c.CertificationID == id);
+                break;
+
+            case "workexperience":
+                entity = _context.WorkExperience.FirstOrDefault(W => W.WorkExperienceID == id);
+                break;
+
+            case "skills":
+                entity = _context.Skills.FirstOrDefault(c => c.SkillID == id);
+                break;
+            // Add more cases for other content types
+            default:
+                return NotFound("Entity type not recognized.");
+        }
+
+        if (entity == null)
+        {
+            return NotFound();
+        }
+
+        // Remove the entity from the correct DbSet based on the entityType
+        switch (entityType.ToLower())
+        {
+            case "education":
+                _context.Education.Remove((Education)entity);
+                break;
+            case "project":
+                _context.Projects.Remove((Projects)entity);
+                break;
+            case "certification":
+                _context.Certifications.Remove((Certifications)entity);
+                break;
+            case "workexperience":
+                _context.WorkExperience.Remove((WorkExperience)entity);
+                break;
+            case "skills":
+                _context.Skills.Remove((Skills)entity);
+                break;
+
+        } 
+        _context.SaveChanges();
+        return RedirectToAction("Index"); // Or to any other page that shows the list of items
+    }
 
     public IActionResult Index(string email)
     {
@@ -40,8 +97,7 @@ public class HomeController : Controller
         ViewBag.UserEmail = userEmail;
         TempData["Email"] = email;
         return View();
-    }
-
+    } 
     [HttpGet]
     public IActionResult GenerateQRCode()
     {
@@ -111,12 +167,10 @@ public class HomeController : Controller
 
     public IActionResult Education()
     {
-        int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
-
-
-        var educationList = _context.Education.Where(e => e.UserID == UserID) // Replace with the correct property name
+        int UserID = (int)HttpContext.Session.GetInt32("UserID"); 
+        var educationList = _context.Education.Where(e => e.UserID == UserID)
 .ToList();
-        return View(educationList ?? new List<Education>()); // Ensure a valid list is passed
+        return View(educationList ?? new List<Education>()); 
     }
     [HttpPost]
     public async Task<IActionResult> SubmitEducation(Education model)
@@ -180,7 +234,6 @@ public class HomeController : Controller
             }
             else
             {
-                // Add new user details (though in your case this might not happen often)
                 userDetails.UserID = userId.Value; // Ensure UserID is set
                 _context.UserDetails.Add(userDetails);
             }
@@ -239,20 +292,14 @@ public class HomeController : Controller
     {
         if (ModelState.IsValid)
         {
-
             int? userID = HttpContext.Session.GetInt32("UserID");
-            model.UserID = userID.Value;  // Assign the UserID from session to the model
-
+            model.UserID = userID.Value;
             _context.Skills.Add(model);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");  // Redirect to Home or other success page
         }
-
         return View("Index");
     }
-
-
-
     public IActionResult WorkExperience()
     {
         int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
@@ -269,8 +316,7 @@ public class HomeController : Controller
         {
 
             int? userID = HttpContext.Session.GetInt32("UserID");
-            model.UserID = userID.Value;  // Assign the UserID from session to the model
-
+            model.UserID = userID.Value;  
             _context.WorkExperience.Add(model);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");  // Redirect to Home or other success page

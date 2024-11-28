@@ -75,8 +75,7 @@
                         <td>@WorkExperience.StartDate</td>
                         <td>@WorkExperience.EndDate</td>
                         <td>
-                            <a href="@Url.Action("Edit", "Users", new { id = WorkExperience.WorkExperienceID })" class="btn btn-primary">Edit</a>
-                            <a href="@Url.Action("Delete", "Users", new { id = WorkExperience.WorkExperienceID })" class="btn btn-danger">Delete</a>
+                            <a href="@Url.Action("Delete", "Home", new { entityType = "workexperience", id = WorkExperience.WorkExperienceID})" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     }

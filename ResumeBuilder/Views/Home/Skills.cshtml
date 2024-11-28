@@ -51,8 +51,7 @@
                     <tr>
                         <td>@skills.Name</td>
                         <td>
-                            <a href="@Url.Action("Edit", "Users", new { id = skills.SkillID })" class="btn btn-primary">Edit</a>
-                            <a href="@Url.Action("Delete", "Users", new { id = skills.SkillID})" class="btn btn-danger">Delete</a>
+                            <a href="@Url.Action("Delete", "Home", new { entityType = "skills", id = skills.SkillID})" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     }

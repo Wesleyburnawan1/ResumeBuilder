@@ -58,8 +58,7 @@
                     <td>@certification.Issuer</td>
                     <td>@certification.Name</td>
                     <td>
-                        <a href="@Url.Action("Edit", "Users", new { id = certification.CertificationID })" class="btn btn-primary">Edit</a>
-                        <a href="@Url.Action("Delete", "Users", new { id = certification.CertificationID })" class="btn btn-danger">Delete</a>
+                        <a href="@Url.Action("Delete", "Home", new { entityType = "certification", id = certification.CertificationID })" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
                 }
