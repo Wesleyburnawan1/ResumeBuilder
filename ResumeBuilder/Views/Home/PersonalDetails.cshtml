@@ -37,6 +37,13 @@
                 </div>
             </div>
             <div class="row mb-3">
+                <div class="col-sm-12 d-flex align-items-center">
+                    <label class="col-form-label mr-2" for="chkVisibility">Make Resume Visible</label>
+                    <input type="checkbox" class="form-check-input" id="chkVisibility" name="Visibility" value="true" @(Model.Visibility ? "checked" : "")>
+                </div>
+            </div>
+
+            <div class="row mb-3">
                 <div class="col-sm-12">
                     <button type="submit" class="btn btn-primary" style="float: right">Submit</button>
                     <button type="button" onclick="clearForm('form')" class="btn btn-primary" style="float: right; margin-right: 5px">Clear</button>
