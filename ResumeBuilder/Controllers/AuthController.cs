@@ -117,15 +117,16 @@ namespace ResumeBuilder.Controllers
         // Logout action (if you add cookie authentication)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public async Task<IActionResult> Logout()
-        {
+        { 
             // Sign the user out
             HttpContext.Session.Clear();
 
+            HttpContext.Response.Cookies.Delete(".AspNetCore.Session");
+
             await HttpContext.SignOutAsync();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Auth");
         }
     }
 }

@@ -87,7 +87,7 @@ public class HomeController : Controller
         string userEmail = HttpContext.Session.GetString("Email");
         if (string.IsNullOrEmpty(userEmail) && string.IsNullOrEmpty(email))
         {
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Login", "Auth");
         }
         if (string.IsNullOrEmpty(userEmail) && !string.IsNullOrEmpty(email))
         {

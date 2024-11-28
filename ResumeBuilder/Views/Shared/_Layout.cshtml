@@ -64,7 +64,9 @@
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button> *@
-                <a class="navbar-brand" asp-area="" asp-controller="Auth" asp-action="Login">Logout</a>
+                <form asp-action="Logout" asp-controller="Auth" method="post">
+                    <button type="submit" class="navbar-brand">Logout</button>
+                </form>
             </div>
 
         </nav>
