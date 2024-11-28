@@ -270,7 +270,7 @@ public class HomeController : Controller
 
     }
     [HttpPost]
-    public IActionResult SubmitPersonalDetails(UserDetails userDetails)
+    public async Task<IActionResult> SubmitPersonalDetails(UserDetails userDetails)
     {
         // Retrieve UserID from session
         int? userId = HttpContext.Session.GetInt32("UserID");
@@ -302,7 +302,7 @@ public class HomeController : Controller
         }
 
         // If model state is invalid (e.g., validation errors), return the form with the user details for correction
-        return View(userDetails);
+        return View("Index");
     }
 
     public IActionResult Projects()

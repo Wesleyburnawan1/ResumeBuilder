@@ -27,6 +27,12 @@ namespace ResumeBuilder.Controllers
         // GET: Account/Register
         public IActionResult Register()
         {
+            string userEmail = HttpContext.Session.GetString("Email");
+
+            if (!string.IsNullOrEmpty(userEmail))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -85,6 +91,12 @@ namespace ResumeBuilder.Controllers
 
         public IActionResult Login()
         {
+            string userEmail = HttpContext.Session.GetString("Email");
+
+            if (!string.IsNullOrEmpty(userEmail))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
         [HttpPost]
