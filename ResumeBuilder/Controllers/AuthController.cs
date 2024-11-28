@@ -27,6 +27,12 @@ namespace ResumeBuilder.Controllers
         // GET: Account/Register
         public IActionResult Register()
         {
+            string userEmail = HttpContext.Session.GetString("Email");
+
+            if (!string.IsNullOrEmpty(userEmail))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -85,6 +91,12 @@ namespace ResumeBuilder.Controllers
 
         public IActionResult Login()
         {
+            string userEmail = HttpContext.Session.GetString("Email");
+
+            if (!string.IsNullOrEmpty(userEmail))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
         [HttpPost]
@@ -103,7 +115,7 @@ namespace ResumeBuilder.Controllers
                     {
                         HttpContext.Session.SetString("Email", user.Email);
                         HttpContext.Session.SetInt32("UserID", user.UserID);
-                        return RedirectToAction("Index", "Home", new { email = user.Email });
+                        return RedirectToAction("Index", "Home");
                     }
                 }
 
@@ -117,15 +129,16 @@ namespace ResumeBuilder.Controllers
         // Logout action (if you add cookie authentication)
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public async Task<IActionResult> Logout()
-        {
+        { 
             // Sign the user out
             HttpContext.Session.Clear();
 
+            HttpContext.Response.Cookies.Delete(".AspNetCore.Session");
+
             await HttpContext.SignOutAsync();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Auth");
         }
     }
 }

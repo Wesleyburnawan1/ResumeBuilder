@@ -81,11 +81,10 @@ public class HomeController : Controller
     public IActionResult Index(string email)
     {
         string userEmail = HttpContext.Session.GetString("Email");
-        int userid = (int)HttpContext.Session.GetInt32("UserID");
 
         if (string.IsNullOrEmpty(userEmail) && string.IsNullOrEmpty(email))
         {
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Login", "Auth");
         }
 
         if (string.IsNullOrEmpty(userEmail) && !string.IsNullOrEmpty(email))
@@ -93,6 +92,8 @@ public class HomeController : Controller
             userEmail = email;
             TempData["Email"] = email;
         }
+
+        int userid = (int)HttpContext.Session.GetInt32("UserID");
 
         ViewBag.UserEmail = userEmail;
         ViewBag.UserId = userid; // Pass userId to the view
@@ -193,8 +194,13 @@ public class HomeController : Controller
     }
     public IActionResult Certifications()
     {
-        int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
+        string userEmail = HttpContext.Session.GetString("Email");
 
+        if (string.IsNullOrEmpty(userEmail))
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+        int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
 
         var certificationslist = _context.Certifications.Where(e => e.UserID == UserID) // Replace with the correct property name
 .ToList();
@@ -221,6 +227,12 @@ public class HomeController : Controller
 
     public IActionResult Education()
     {
+        string userEmail = HttpContext.Session.GetString("Email");
+
+        if (string.IsNullOrEmpty(userEmail))
+        {
+            return RedirectToAction("Login", "Auth");
+        }
         int UserID = (int)HttpContext.Session.GetInt32("UserID");
         var educationList = _context.Education.Where(e => e.UserID == UserID)
 .ToList();
@@ -244,12 +256,18 @@ public class HomeController : Controller
     }
     public IActionResult PersonalDetails()
     {
+        string userEmail = HttpContext.Session.GetString("Email");
+
+        if (string.IsNullOrEmpty(userEmail))
+        {
+            return RedirectToAction("Login", "Auth");
+        }
         int? userId = HttpContext.Session.GetInt32("UserID");
 
         if (userId == null)
         {
             // Handle the case where UserID is not available in session (e.g., redirect to login page)
-            return RedirectToAction("Login", "Account"); // Example, adjust as per your login flow
+            return RedirectToAction("Login", "Auth"); // Example, adjust as per your login flow
         }
 
         // Retrieve the user's details from the database using the UserID from the session
@@ -265,7 +283,7 @@ public class HomeController : Controller
 
     }
     [HttpPost]
-    public IActionResult SubmitPersonalDetails(UserDetails userDetails)
+    public async Task<IActionResult> SubmitPersonalDetails(UserDetails userDetails)
     {
         // Retrieve UserID from session
         int? userId = HttpContext.Session.GetInt32("UserID");
@@ -297,11 +315,18 @@ public class HomeController : Controller
         }
 
         // If model state is invalid (e.g., validation errors), return the form with the user details for correction
-        return View(userDetails);
+        return View("Index");
     }
 
     public IActionResult Projects()
     {
+        string userEmail = HttpContext.Session.GetString("Email");
+
+        if (string.IsNullOrEmpty(userEmail))
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+
         int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
 
 
@@ -333,6 +358,13 @@ public class HomeController : Controller
     }
     public IActionResult Skills()
     {
+        string userEmail = HttpContext.Session.GetString("Email");
+
+        if (string.IsNullOrEmpty(userEmail))
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+
         int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
 
 
@@ -356,6 +388,13 @@ public class HomeController : Controller
     }
     public IActionResult WorkExperience()
     {
+        string userEmail = HttpContext.Session.GetString("Email");
+
+        if (string.IsNullOrEmpty(userEmail))
+        {
+            return RedirectToAction("Login", "Auth");
+        }
+        
         int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
 
 
