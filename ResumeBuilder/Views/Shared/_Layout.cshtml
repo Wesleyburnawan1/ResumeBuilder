@@ -38,6 +38,11 @@
             padding: 20px; /* Padding around the main content */
         }
 
+        .logout-button {
+            background-color: transparent;
+            border: none;
+        }
+
         footer {
             flex: 0 0 auto; /* Footer takes only the space it needs */
             background: #f8f9fa; /* Match the sidebar background */
@@ -65,7 +70,7 @@
                 <span class="navbar-toggler-icon"></span>
                 </button> *@
                 <form asp-action="Logout" asp-controller="Auth" method="post">
-                    <button type="submit" class="navbar-brand">Logout</button>
+                    <button type="submit" class="logout-button">Logout</button>
                 </form>
             </div>
 
