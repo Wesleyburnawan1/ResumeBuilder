@@ -195,7 +195,12 @@ public class HomeController : Controller
 
     public IActionResult Projects()
     {
-        return View();
+        int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
+
+
+        var projectlist = _context.Projects.Where(e => e.UserID == UserID) // Replace with the correct property name
+.ToList();
+        return View(projectlist ?? new List<Projects>()); // Ensure a valid list is passed
     }
     public async Task<IActionResult> SubmitProjects(Projects model)
     {
@@ -221,7 +226,13 @@ public class HomeController : Controller
     }
     public IActionResult Skills()
     {
-        return View();
+        int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
+
+
+        var skilllist = _context.Skills.Where(e => e.UserID == UserID) // Replace with the correct property name
+.ToList();
+        return View(skilllist ?? new List<Skills>()); // Ensure a valid list is passed
+
     }
     [HttpPost]
     public async Task<IActionResult> SubmitSkills(Skills model)
@@ -244,7 +255,12 @@ public class HomeController : Controller
 
     public IActionResult WorkExperience()
     {
-        return View();
+        int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
+
+
+        var WorkExperienceList = _context.WorkExperience.Where(e => e.UserID == UserID) // Replace with the correct property name
+.ToList();
+        return View(WorkExperienceList ?? new List<WorkExperience>()); // Ensure a valid list is passed
     }
     [HttpPost]
     public async Task<IActionResult> SubmitWorkExperience(WorkExperience model)
