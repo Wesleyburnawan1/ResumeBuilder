@@ -1,4 +1,4 @@
-﻿@model ResumeBuilder.Models.Projects
+﻿@model IEnumerable<ResumeBuilder.Models.Projects>
 @{
     ViewData["Title"] = "Projects";
 
@@ -10,42 +10,78 @@
 </style>
 <div class="text-left" style="margin-left:18%;">
     <span style="font-size:40px;">Enter Your Project Details here</span>
-        <form method="post" asp-action="SubmitProjects" id="ProjectsForm">
+    <form method="post" asp-action="SubmitProjects" id="ProjectsForm">
 
-    <div class="row mb-3">
-        <div class="col-sm-6">
-            <label class="col-sm-12 col-form-label">Project Name</label>
-            <input id="txtprojectname" name="Name" type="text" class="form-control" />
+        <div class="row mb-3">
+            <div class="col-sm-6">
+                <label class="col-sm-12 col-form-label">Project Name</label>
+                <input id="txtprojectname" name="Name" type="text" class="form-control" />
+            </div>
+            <div class="col-sm-6">
+                <label class="col-sm-12 col-form-label">Role</label>
+                <input id="txtrole" type="text" name="Role" class="form-control" />
+            </div>
         </div>
-        <div class="col-sm-6">
-            <label class="col-sm-12 col-form-label">Role</label>
-            <input id="txtrole" type="text" name="Role" class="form-control" />
-        </div>
-    </div>
-    <div class="row mb-3 d-flex justify-content-between">
-        <div class="col-sm-5">
-            <label class="col-sm-12 col-form-label">Start Date</label>
-            <input id="txtstartdate" type="date" name="StartDate" class="form-control" />
-        </div>
+        <div class="row mb-3 d-flex justify-content-between">
+            <div class="col-sm-5">
+                <label class="col-sm-12 col-form-label">Start Date</label>
+                <input id="txtstartdate" type="date" name="StartDate" class="form-control" />
+            </div>
 
-        <div class="col-sm-5">
-            <label class="col-sm-12 col-form-label">End Date</label>
-            <input id="txtenddate" type="date" class="form-control" name="EndDate" />
+            <div class="col-sm-5">
+                <label class="col-sm-12 col-form-label">End Date</label>
+                <input id="txtenddate" type="date" class="form-control" name="EndDate" />
+            </div>
         </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-sm-12">
-            <label class="col-sm-12 col-form-label">Description</label>
-            <textarea id="txtdesc" type="text" class="form-control" rows="5" name="Description" placeholder="Enter your description here"></textarea>
+        <div class="row mb-3">
+            <div class="col-sm-12">
+                <label class="col-sm-12 col-form-label">Description</label>
+                <textarea id="txtdesc" type="text" class="form-control" rows="5" name="Description" placeholder="Enter your description here"></textarea>
+            </div>
         </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-sm-12">
-            <button type="submit" class="btn btn-primary" id="btnSUbmit" Style="float: right"> Submit</button>
+        <div class="row mb-3">
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary" id="btnSUbmit" Style="float: right"> Submit</button>
                 <button type="button" onclick="clearForm('ProjectsForm')" class="btn btn-primary" style="float: right; margin-right: 5px">Clear</button>
             </div>
-    </div>
+        </div>
     </form>
+    <table class="table table-bordered table-striped">
+        <tbody>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+                @if (Model == null || !Model.Any())
+                {
+                <tr>
+                    <td colspan="7" class="text-center">No projects records found.</td>
+                </tr>
+                }
+                else
+                {
+                    @foreach (var projects in Model)
+                    {
+                    <tr>
+                        <td>@projects.Name</td>
+                        <td>@projects.Role</td>
+                        <td>@projects.StartDate</td>
+                        <td>@projects.EndDate</td>
+                        <td>
+                            <a href="@Url.Action("Delete", "Home", new { entityType = "project", id = projects.ProjectID })" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    }
+                }
+        </tbody>
+    </table>
+
 </div>
 
 <script type="text/javascript">

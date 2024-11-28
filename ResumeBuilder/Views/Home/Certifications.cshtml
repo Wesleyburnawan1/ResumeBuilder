@@ -1,4 +1,4 @@
-﻿@model ResumeBuilder.Models.Certifications
+﻿@model IEnumerable<ResumeBuilder.Models.Certifications>
 
 @{
     ViewData["Title"] = "Certifications";
@@ -35,6 +35,37 @@
             </div>
         </div>
     </form>
+    <table class="table table-bordered table-striped">
+        <tbody>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Issuer</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+            @if (Model == null || !Model.Any())
+            {
+            <tr>
+                <td colspan="7" class="text-center">No certification records found.</td>
+            </tr>
+            }
+            else
+            {
+                @foreach (var certification in Model)
+                {
+                <tr>
+                    <td>@certification.Issuer</td>
+                    <td>@certification.Name</td>
+                    <td>
+                        <a href="@Url.Action("Delete", "Home", new { entityType = "certification", id = certification.CertificationID })" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+
 </div>
 <script type="text/javascript">
     function clearForm(formId) {

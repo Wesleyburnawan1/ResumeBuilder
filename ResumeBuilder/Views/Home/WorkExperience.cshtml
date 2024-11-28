@@ -1,4 +1,4 @@
-﻿@model ResumeBuilder.Models.WorkExperience
+﻿@model IEnumerable<ResumeBuilder.Models.WorkExperience>
 
 @{
     ViewData["Title"] = "Work Experience";
@@ -15,28 +15,28 @@
         <div class="row mb-3">
             <div class="col-sm-6">
                 <label class="col-sm-12 col-form-label">Company Name</label>
-                <input name="CompanyName" type="text" class="form-control" asp-for="CompanyName" />
+                <input name="CompanyName" type="text" class="form-control"  />
             </div>
             <div class="col-sm-6">
                 <label class="col-sm-12 col-form-label">Title</label>
-                <input name="Title" type="text" class="form-control" asp-for="Title" />
+                <input name="Title" type="text" class="form-control"  />
             </div>
         </div>
         <div class="row mb-3 d-flex justify-content-between">
             <div class="col-sm-5">
                 <label class="col-sm-12 col-form-label">Start Date</label>
-                <input name="StartDate" type="date" class="form-control" asp-for="StartDate" />
+                <input name="StartDate" type="date" class="form-control" />
             </div>
 
             <div class="col-sm-5">
                 <label class="col-sm-12 col-form-label">End Date</label>
-                <input name="EndDate" type="date" class="form-control" asp-for="EndDate" />
+                <input name="EndDate" type="date" class="form-control" />
             </div>
         </div>
         <div class="row mb-3">
             <div class="col-sm-12">
                 <label class="col-sm-12 col-form-label">Description</label>
-                <textarea id="txtdesc" class="form-control" rows="5" placeholder="Enter your description here" asp-for="Description"></textarea>
+                <textarea id="txtdesc" class="form-control" rows="5" placeholder="Enter your description here" name="Description"></textarea>
             </div>
         </div>
         <div class="row mb-3">
@@ -46,6 +46,43 @@
             </div>
         </div>
     </form>
+    <table class="table table-bordered table-striped">
+        <tbody>
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Title</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+                @if (Model == null || !Model.Any())
+                {
+                <tr>
+                    <td colspan="7" class="text-center">No Work Experience records found.</td>
+                </tr>
+                }
+                else
+                {
+                    @foreach (var WorkExperience in Model)
+                    {
+                    <tr>
+                        <td>@WorkExperience.CompanyName</td>
+
+                        <td>@WorkExperience.Title</td>
+                        <td>@WorkExperience.StartDate</td>
+                        <td>@WorkExperience.EndDate</td>
+                        <td>
+                            <a href="@Url.Action("Delete", "Home", new { entityType = "workexperience", id = WorkExperience.WorkExperienceID})" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    }
+                }
+        </tbody>
+    </table>
+
 </div>
 <script type="text/javascript">
     function clearForm(formId) {

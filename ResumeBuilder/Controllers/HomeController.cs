@@ -14,7 +14,8 @@ using System.Drawing;
 namespace ResumeBuilder.Controllers;
 
 public class HomeController : Controller
-{private readonly ILogger<HomeController> _logger;
+{
+    private readonly ILogger<HomeController> _logger;
     private readonly ApplicationDbContext _context;
 
     public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
@@ -23,37 +24,93 @@ public class HomeController : Controller
         _context = context;
     }
 
+    [HttpGet]
+    public IActionResult Delete(string entityType, int id)
+    {
+        object entity = null;
+
+        switch (entityType.ToLower())
+        {
+            case "education":
+                entity = _context.Education.FirstOrDefault(e => e.EducationID == id);
+                break;
+            case "project":
+                entity = _context.Projects.FirstOrDefault(p => p.ProjectID == id);
+                break;
+            case "certification":
+                entity = _context.Certifications.FirstOrDefault(c => c.CertificationID == id);
+                break;
+
+            case "workexperience":
+                entity = _context.WorkExperience.FirstOrDefault(W => W.WorkExperienceID == id);
+                break;
+
+            case "skills":
+                entity = _context.Skills.FirstOrDefault(c => c.SkillID == id);
+                break;
+            // Add more cases for other content types
+            default:
+                return NotFound("Entity type not recognized.");
+        }
+
+        if (entity == null)
+        {
+            return NotFound();
+        }
+
+        // Remove the entity from the correct DbSet based on the entityType
+        switch (entityType.ToLower())
+        {
+            case "education":
+                _context.Education.Remove((Education)entity);
+                break;
+            case "project":
+                _context.Projects.Remove((Projects)entity);
+                break;
+            case "certification":
+                _context.Certifications.Remove((Certifications)entity);
+                break;
+            case "workexperience":
+                _context.WorkExperience.Remove((WorkExperience)entity);
+                break;
+            case "skills":
+                _context.Skills.Remove((Skills)entity);
+                break;
+
+        } 
+        _context.SaveChanges();
+        return RedirectToAction("Index"); // Or to any other page that shows the list of items
+    }
 
     public IActionResult Index(string email)
-    { 
-        string userEmail = HttpContext.Session.GetString("Email"); 
+    {
+        string userEmail = HttpContext.Session.GetString("Email");
         if (string.IsNullOrEmpty(userEmail) && string.IsNullOrEmpty(email))
         {
             return RedirectToAction("Login", "Account");
-        } 
+        }
         if (string.IsNullOrEmpty(userEmail) && !string.IsNullOrEmpty(email))
         {
-            userEmail = email; 
-            TempData["Email"] = email; 
-        } 
+            userEmail = email;
+            TempData["Email"] = email;
+        }
         ViewBag.UserEmail = userEmail;
         TempData["Email"] = email;
         return View();
-    }
-
+    } 
     [HttpGet]
     public IActionResult GenerateQRCode()
     {
         try
-        { 
+        {
             string email = HttpContext.Session.GetString("Email"); // Retrieve email from session
             string QRString = Url.Action("ResumeView", "Home", new { email = email }, Request.Scheme);
 
             using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
             {
                 QRCodeData qrCodeData = qrGenerator.CreateQrCode(QRString, QRCodeGenerator.ECCLevel.Q);
-                PngByteQRCode pngByteQRCode = new PngByteQRCode(qrCodeData); 
-                byte[] qrCodeImage = pngByteQRCode.GetGraphic(5); 
+                PngByteQRCode pngByteQRCode = new PngByteQRCode(qrCodeData);
+                byte[] qrCodeImage = pngByteQRCode.GetGraphic(5);
                 return File(qrCodeImage, "image/png");
             }
         }
@@ -67,12 +124,12 @@ public class HomeController : Controller
         return View();
     }
     public IActionResult ResumeView()
-    { 
+    {
         string sessionemail = HttpContext.Session.GetString("Email");
-        string requestemail = Request.Query["email"]; 
-        if(requestemail != sessionemail)
+        string requestemail = Request.Query["email"];
+        if (requestemail != sessionemail)
         {
-           requestemail  = sessionemail; 
+            requestemail = sessionemail;
             TempData["Email"] = requestemail;
         }
         ViewData["Email"] = sessionemail;
@@ -82,9 +139,15 @@ public class HomeController : Controller
     }
     public IActionResult Certifications()
     {
-        return View();
+        int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
+
+
+        var certificationslist = _context.Certifications.Where(e => e.UserID == UserID) // Replace with the correct property name
+.ToList();
+        return View(certificationslist ?? new List<Certifications>()); // Ensure a valid list is passed
+
     }
-      [HttpPost]
+    [HttpPost]
     public async Task<IActionResult> SubmitCertifications(Certifications model)
     {
         if (ModelState.IsValid)
@@ -104,9 +167,12 @@ public class HomeController : Controller
 
     public IActionResult Education()
     {
-        return View();
+        int UserID = (int)HttpContext.Session.GetInt32("UserID"); 
+        var educationList = _context.Education.Where(e => e.UserID == UserID)
+.ToList();
+        return View(educationList ?? new List<Education>()); 
     }
-        [HttpPost]
+    [HttpPost]
     public async Task<IActionResult> SubmitEducation(Education model)
     {
         if (ModelState.IsValid)
@@ -168,7 +234,6 @@ public class HomeController : Controller
             }
             else
             {
-                // Add new user details (though in your case this might not happen often)
                 userDetails.UserID = userId.Value; // Ensure UserID is set
                 _context.UserDetails.Add(userDetails);
             }
@@ -183,9 +248,14 @@ public class HomeController : Controller
 
     public IActionResult Projects()
     {
-        return View();
+        int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
+
+
+        var projectlist = _context.Projects.Where(e => e.UserID == UserID) // Replace with the correct property name
+.ToList();
+        return View(projectlist ?? new List<Projects>()); // Ensure a valid list is passed
     }
- public async Task<IActionResult> SubmitProjects(Projects model)
+    public async Task<IActionResult> SubmitProjects(Projects model)
     {
         if (ModelState.IsValid)
         {
@@ -209,40 +279,44 @@ public class HomeController : Controller
     }
     public IActionResult Skills()
     {
-        return View();
+        int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
+
+
+        var skilllist = _context.Skills.Where(e => e.UserID == UserID) // Replace with the correct property name
+.ToList();
+        return View(skilllist ?? new List<Skills>()); // Ensure a valid list is passed
+
     }
-      [HttpPost]
+    [HttpPost]
     public async Task<IActionResult> SubmitSkills(Skills model)
     {
         if (ModelState.IsValid)
         {
-
             int? userID = HttpContext.Session.GetInt32("UserID");
-            model.UserID = userID.Value;  // Assign the UserID from session to the model
-
+            model.UserID = userID.Value;
             _context.Skills.Add(model);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");  // Redirect to Home or other success page
         }
-
         return View("Index");
     }
-
-  
-
     public IActionResult WorkExperience()
     {
-        return View();
+        int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
+
+
+        var WorkExperienceList = _context.WorkExperience.Where(e => e.UserID == UserID) // Replace with the correct property name
+.ToList();
+        return View(WorkExperienceList ?? new List<WorkExperience>()); // Ensure a valid list is passed
     }
- [HttpPost]
+    [HttpPost]
     public async Task<IActionResult> SubmitWorkExperience(WorkExperience model)
     {
         if (ModelState.IsValid)
         {
 
             int? userID = HttpContext.Session.GetInt32("UserID");
-            model.UserID = userID.Value;  // Assign the UserID from session to the model
-
+            model.UserID = userID.Value;  
             _context.WorkExperience.Add(model);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");  // Redirect to Home or other success page
