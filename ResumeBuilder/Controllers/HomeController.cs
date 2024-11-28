@@ -1,4 +1,3 @@
-
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -131,56 +130,64 @@ public class HomeController : Controller
         if (Request.Query.ContainsKey("userId"))
         {
             int userId;
+            // Validate the userId from query string
             bool isValidUserId = int.TryParse(Request.Query["userId"], out userId);
 
-            if (isValidUserId)
+            if (!isValidUserId)
             {
-                var user = await _context.UserDetails
-     .Where(ud => ud.UserID == userId && ud.Visibility == true)
-     .Select(ud => new
-     {
-         UserDetails = ud,
-         UserEmail = ud.User.Email // Access the email from the related Users table
-     })
-     .FirstOrDefaultAsync();
+                // If userId is not a valid integer, return a BadRequest response
+                return BadRequest("Invalid UserId parameter");
+            }
 
-                if (user == null)
-                {
-                    return NotFound("User not found");
-                }
+            // Fetch user email by userId (for TempData)
+            var useremail = await _context.Users
+                                          .Where(u => u.UserID == userId)
+                                          .FirstOrDefaultAsync();
 
-                // Fetch related data using the UserId
-                var resumeViewModel = new ResumeViewModel
-                {
-
-                    User = user.UserDetails,
-                    UserEmail = user.UserEmail,  // The user's email
-                    EducationList = await _context.Education
-                                               .Where(e => e.UserID == user.UserDetails.UserID)
-                                               .ToListAsync(),
-                    SkillsList = await _context.Skills
-                                           .Where(s => s.UserID == user.UserDetails.UserID)
-                                           .ToListAsync(),
-                    WorkExperienceList = await _context.WorkExperience
-                                                   .Where(w => w.UserID == user.UserDetails.UserID)
-                                                   .ToListAsync(),
-                    ProjectsList = await _context.Projects
-                                             .Where(p => p.UserID == user.UserDetails.UserID)
-                                             .ToListAsync(),
-                    CertificationsList = await _context.Certifications
-                                                   .Where(c => c.UserID == user.UserDetails.UserID)
-                                                   .ToListAsync()
-                };
-
-                return View(resumeViewModel);
+            if (useremail != null)
+            {
+                TempData["Email"] = useremail.Email; // Save only the Email to TempData
             }
             else
             {
-                return BadRequest("Invalid UserId parameter");
+                TempData["Email"] = "No email found"; // Default if no email is found
             }
+
+            // Fetch user details
+            var user = await _context.UserDetails
+                                      .FirstOrDefaultAsync(u => u.UserID == userId && u.Visibility == true);
+
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            // Fetch related data based on the userId
+            var resumeViewModel = new ResumeViewModel
+            {
+                User = user,
+                EducationList = await _context.Education
+                                               .Where(e => e.UserID == user.UserID)
+                                               .ToListAsync(),
+                SkillsList = await _context.Skills
+                                           .Where(s => s.UserID == user.UserID)
+                                           .ToListAsync(),
+                WorkExperienceList = await _context.WorkExperience
+                                                   .Where(w => w.UserID == user.UserID)
+                                                   .ToListAsync(),
+                ProjectsList = await _context.Projects
+                                             .Where(p => p.UserID == user.UserID)
+                                             .ToListAsync(),
+                CertificationsList = await _context.Certifications
+                                                   .Where(c => c.UserID == user.UserID)
+                                                   .ToListAsync()
+            };
+
+            return View(resumeViewModel);
         }
         else
         {
+            // If UserId is missing in the query string, return an error
             return BadRequest("UserId parameter is missing");
         }
     }
@@ -378,3 +385,4 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
+

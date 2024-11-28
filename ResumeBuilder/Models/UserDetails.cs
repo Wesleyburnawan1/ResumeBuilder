@@ -12,7 +12,6 @@ namespace ResumeBuilder.Models
         public string LastName { get; set; }
         public string Address{ get; set; }
         public bool Visibility { get; set; }
-        public virtual User User { get; set; }  // This assumes a foreign key relationship
 
 
     }

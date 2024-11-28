@@ -1,5 +1,4 @@
-﻿
-@model ResumeViewModel
+﻿@model ResumeViewModel
 @{
     Layout = null;
 }
@@ -74,10 +73,10 @@
 
 <div class="container">
     <h1>@Model.User.FirstName @Model.User.LastName's Resume</h1>
-    
+
     <h2>Contact Information</h2>
     <p><strong>Address:</strong> @Model.User.Address</p>
-    <p><strong>Email:</strong> @Model.UserEmail</p>  
+    <p><strong>Email:</strong>@TempData["Email"]</p>
 
     <div class="section">
         <h3>Education</h3>
@@ -85,7 +84,7 @@
             @foreach (var education in Model.EducationList)
             {
                 <li>
-                    <strong>@education.Degree</strong> from @education.InstituteName (@education.StartingYear - @education.EndingYear)<br/>
+                    <strong>@education.Degree</strong> from @education.InstituteName (@education.StartingYear - @education.EndingYear)<br />
                     <strong>GPA:</strong> @education.GPA
                 </li>
             }
@@ -108,7 +107,7 @@
             @foreach (var work in Model.WorkExperienceList)
             {
                 <li>
-                    <strong>@work.Title</strong> at @work.CompanyName (<em>@work.StartDate.ToString("MMM yyyy")</em> to <em>@work.EndDate.ToString("MMM yyyy")</em>)<br/>
+                    <strong>@work.Title</strong> at @work.CompanyName (<em>@work.StartDate.ToString("MMM yyyy")</em> to <em>@work.EndDate.ToString("MMM yyyy")</em>)<br />
                     <p>@work.Description</p>
                 </li>
             }
@@ -121,8 +120,8 @@
             @foreach (var project in Model.ProjectsList)
             {
                 <li>
-                    <strong>@project.Name</strong><br/>
-                    <em>@project.Role</em><br/>
+                    <strong>@project.Name</strong><br />
+                    <em>@project.Role</em><br />
                     <p>@project.Description</p>
                 </li>
             }
@@ -155,7 +154,4 @@
         </div>
     }
 </div>
-
-
-
 
