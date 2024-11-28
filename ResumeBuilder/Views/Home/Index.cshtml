@@ -13,7 +13,9 @@
     <div>
         <form asp-controller="Home" asp-action="ResumeView" method="get">
             <input type="hidden" name="email" value="@TempData["Email"]" />
-            <button type="submit" class="btn btn-primary">View Resume</button>
+            <a href="@Url.Action("ResumeView", "Home", new { userId = ViewBag.UserId })" class="btn btn-primary">
+                View Resume
+            </a>
         </form>
     </div>
 </div>
