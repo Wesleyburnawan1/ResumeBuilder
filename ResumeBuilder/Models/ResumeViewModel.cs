@@ -4,6 +4,7 @@ namespace ResumeBuilder.Models
 {
     public class ResumeViewModel
     {
+        public string UserEmail { get; set; }
         public UserDetails User { get; set; }
         public List<Education> EducationList { get; set; }
         public List<Skills> SkillsList { get; set; }
