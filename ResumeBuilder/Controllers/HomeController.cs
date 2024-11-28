@@ -14,7 +14,8 @@ using System.Drawing;
 namespace ResumeBuilder.Controllers;
 
 public class HomeController : Controller
-{private readonly ILogger<HomeController> _logger;
+{
+    private readonly ILogger<HomeController> _logger;
     private readonly ApplicationDbContext _context;
 
     public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
@@ -25,17 +26,17 @@ public class HomeController : Controller
 
 
     public IActionResult Index(string email)
-    { 
-        string userEmail = HttpContext.Session.GetString("Email"); 
+    {
+        string userEmail = HttpContext.Session.GetString("Email");
         if (string.IsNullOrEmpty(userEmail) && string.IsNullOrEmpty(email))
         {
             return RedirectToAction("Login", "Account");
-        } 
+        }
         if (string.IsNullOrEmpty(userEmail) && !string.IsNullOrEmpty(email))
         {
-            userEmail = email; 
-            TempData["Email"] = email; 
-        } 
+            userEmail = email;
+            TempData["Email"] = email;
+        }
         ViewBag.UserEmail = userEmail;
         TempData["Email"] = email;
         return View();
@@ -45,15 +46,15 @@ public class HomeController : Controller
     public IActionResult GenerateQRCode()
     {
         try
-        { 
+        {
             string email = HttpContext.Session.GetString("Email"); // Retrieve email from session
             string QRString = Url.Action("ResumeView", "Home", new { email = email }, Request.Scheme);
 
             using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
             {
                 QRCodeData qrCodeData = qrGenerator.CreateQrCode(QRString, QRCodeGenerator.ECCLevel.Q);
-                PngByteQRCode pngByteQRCode = new PngByteQRCode(qrCodeData); 
-                byte[] qrCodeImage = pngByteQRCode.GetGraphic(5); 
+                PngByteQRCode pngByteQRCode = new PngByteQRCode(qrCodeData);
+                byte[] qrCodeImage = pngByteQRCode.GetGraphic(5);
                 return File(qrCodeImage, "image/png");
             }
         }
@@ -67,12 +68,12 @@ public class HomeController : Controller
         return View();
     }
     public IActionResult ResumeView()
-    { 
+    {
         string sessionemail = HttpContext.Session.GetString("Email");
-        string requestemail = Request.Query["email"]; 
-        if(requestemail != sessionemail)
+        string requestemail = Request.Query["email"];
+        if (requestemail != sessionemail)
         {
-           requestemail  = sessionemail; 
+            requestemail = sessionemail;
             TempData["Email"] = requestemail;
         }
         ViewData["Email"] = sessionemail;
@@ -82,9 +83,15 @@ public class HomeController : Controller
     }
     public IActionResult Certifications()
     {
-        return View();
+        int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
+
+
+        var certificationslist = _context.Certifications.Where(e => e.UserID == UserID) // Replace with the correct property name
+.ToList();
+        return View(certificationslist ?? new List<Certifications>()); // Ensure a valid list is passed
+
     }
-      [HttpPost]
+    [HttpPost]
     public async Task<IActionResult> SubmitCertifications(Certifications model)
     {
         if (ModelState.IsValid)
@@ -104,9 +111,14 @@ public class HomeController : Controller
 
     public IActionResult Education()
     {
-        return View();
+        int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
+
+
+        var educationList = _context.Education.Where(e => e.UserID == UserID) // Replace with the correct property name
+.ToList();
+        return View(educationList ?? new List<Education>()); // Ensure a valid list is passed
     }
-        [HttpPost]
+    [HttpPost]
     public async Task<IActionResult> SubmitEducation(Education model)
     {
         if (ModelState.IsValid)
@@ -183,9 +195,14 @@ public class HomeController : Controller
 
     public IActionResult Projects()
     {
-        return View();
+        int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
+
+
+        var projectlist = _context.Projects.Where(e => e.UserID == UserID) // Replace with the correct property name
+.ToList();
+        return View(projectlist ?? new List<Projects>()); // Ensure a valid list is passed
     }
- public async Task<IActionResult> SubmitProjects(Projects model)
+    public async Task<IActionResult> SubmitProjects(Projects model)
     {
         if (ModelState.IsValid)
         {
@@ -209,9 +226,15 @@ public class HomeController : Controller
     }
     public IActionResult Skills()
     {
-        return View();
+        int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
+
+
+        var skilllist = _context.Skills.Where(e => e.UserID == UserID) // Replace with the correct property name
+.ToList();
+        return View(skilllist ?? new List<Skills>()); // Ensure a valid list is passed
+
     }
-      [HttpPost]
+    [HttpPost]
     public async Task<IActionResult> SubmitSkills(Skills model)
     {
         if (ModelState.IsValid)
@@ -228,13 +251,18 @@ public class HomeController : Controller
         return View("Index");
     }
 
-  
+
 
     public IActionResult WorkExperience()
     {
-        return View();
+        int UserID = (int)HttpContext.Session.GetInt32("UserID"); // Assuming Email is stored in session
+
+
+        var WorkExperienceList = _context.WorkExperience.Where(e => e.UserID == UserID) // Replace with the correct property name
+.ToList();
+        return View(WorkExperienceList ?? new List<WorkExperience>()); // Ensure a valid list is passed
     }
- [HttpPost]
+    [HttpPost]
     public async Task<IActionResult> SubmitWorkExperience(WorkExperience model)
     {
         if (ModelState.IsValid)

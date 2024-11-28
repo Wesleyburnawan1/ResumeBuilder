@@ -8,6 +8,6 @@
         public string Degree { get; set; }
         public int StartingYear { get; set; }
         public int EndingYear { get; set; }
-        public double GPA { get; set; } 
+        public decimal GPA { get; set; } 
     }
 }
