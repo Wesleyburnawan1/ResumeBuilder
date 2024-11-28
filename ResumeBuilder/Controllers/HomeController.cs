@@ -1,11 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-
-
 using Microsoft.EntityFrameworkCore;
 using ResumeBuilder.Data;
-using ResumeBuilder.Models;
-
 using ResumeBuilder.Models;
 using QRCoder;
 using static QRCoder.PayloadGenerator;
@@ -77,7 +73,7 @@ public class HomeController : Controller
                 _context.Skills.Remove((Skills)entity);
                 break;
 
-        } 
+        }
         _context.SaveChanges();
         return RedirectToAction("Index"); // Or to any other page that shows the list of items
     }
@@ -85,26 +81,32 @@ public class HomeController : Controller
     public IActionResult Index(string email)
     {
         string userEmail = HttpContext.Session.GetString("Email");
+        int userid = (int)HttpContext.Session.GetInt32("UserID");
+
         if (string.IsNullOrEmpty(userEmail) && string.IsNullOrEmpty(email))
         {
             return RedirectToAction("Login", "Account");
         }
+
         if (string.IsNullOrEmpty(userEmail) && !string.IsNullOrEmpty(email))
         {
             userEmail = email;
             TempData["Email"] = email;
         }
+
         ViewBag.UserEmail = userEmail;
-        TempData["Email"] = email;
+        ViewBag.UserId = userid; // Pass userId to the view
+
         return View();
-    } 
+    }
     [HttpGet]
     public IActionResult GenerateQRCode()
     {
         try
         {
+            int userid = (int)HttpContext.Session.GetInt32("UserID");
             string email = HttpContext.Session.GetString("Email"); // Retrieve email from session
-            string QRString = Url.Action("ResumeView", "Home", new { email = email }, Request.Scheme);
+            string QRString = Url.Action("ResumeView", "Home", new { UserID = userid }, Request.Scheme);
 
             using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
             {
@@ -123,19 +125,58 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult ResumeView()
+    public async Task<IActionResult> ResumeView()
     {
-        string sessionemail = HttpContext.Session.GetString("Email");
-        string requestemail = Request.Query["email"];
-        if (requestemail != sessionemail)
+        if (Request.Query.ContainsKey("userId"))
         {
-            requestemail = sessionemail;
-            TempData["Email"] = requestemail;
-        }
-        ViewData["Email"] = sessionemail;
-        TempData["Email"] = requestemail;
+            int userId;
+            bool isValidUserId = int.TryParse(Request.Query["userId"], out userId);
 
-        return View();
+            if (isValidUserId)
+            {
+                // Fetch the user based on the UserId from the database
+                var user = await _context.UserDetails
+                                         .FirstOrDefaultAsync(u => u.UserID == userId);
+
+                if (user == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                // Fetch related data using the UserId
+                var resumeViewModel = new ResumeViewModel
+                {
+                    User = user,
+                    EducationList = await _context.Education
+                                                   .Where(e => e.UserID == user.UserID)
+                                                   .ToListAsync(),
+                    SkillsList = await _context.Skills
+                                               .Where(s => s.UserID == user.UserID)
+                                               .ToListAsync(),
+                    WorkExperienceList = await _context.WorkExperience
+                                                       .Where(w => w.UserID == user.UserID)
+                                                       .ToListAsync(),
+                    ProjectsList = await _context.Projects
+                                                 .Where(p => p.UserID == user.UserID)
+                                                 .ToListAsync(),
+                    CertificationsList = await _context.Certifications
+                                                       .Where(c => c.UserID == user.UserID)
+                                                       .ToListAsync()
+                };
+
+                return View(resumeViewModel);
+            }
+            else
+            {
+                // If the UserId is invalid or not a valid integer, return an error
+                return BadRequest("Invalid UserId parameter");
+            }
+        }
+        else
+        {
+            // If UserId is not found in the query string, return an error or redirect
+            return BadRequest("UserId parameter is missing");
+        }
     }
     public IActionResult Certifications()
     {
@@ -167,10 +208,10 @@ public class HomeController : Controller
 
     public IActionResult Education()
     {
-        int UserID = (int)HttpContext.Session.GetInt32("UserID"); 
+        int UserID = (int)HttpContext.Session.GetInt32("UserID");
         var educationList = _context.Education.Where(e => e.UserID == UserID)
 .ToList();
-        return View(educationList ?? new List<Education>()); 
+        return View(educationList ?? new List<Education>());
     }
     [HttpPost]
     public async Task<IActionResult> SubmitEducation(Education model)
@@ -316,7 +357,7 @@ public class HomeController : Controller
         {
 
             int? userID = HttpContext.Session.GetInt32("UserID");
-            model.UserID = userID.Value;  
+            model.UserID = userID.Value;
             _context.WorkExperience.Add(model);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");  // Redirect to Home or other success page

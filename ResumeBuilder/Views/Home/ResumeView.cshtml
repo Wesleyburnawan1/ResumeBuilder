@@ -4,6 +4,7 @@
 @{
     Layout = null;
 }
+@model ResumeViewModel
 
 <style>
     body {
@@ -73,5 +74,50 @@
 </style>
 <div class="container">
     <h2>Resume View</h2>
+    <h1>@Model.User.FirstName @Model.User.LastName 's Resume</h1>
+
+    <h2>Contact Information</h2>
+    <p>Address: @Model.User.Address</p>
+
+    <h2>Education</h2>
+    <ul>
+        @foreach (var education in Model.EducationList)
+        {
+            <li>@education.Degree - @education.InstituteName</li>
+        }
+    </ul>
+
+    <h2>Skills</h2>
+    <ul>
+        @foreach (var skill in Model.SkillsList)
+        {
+            <li>@skill.Name</li>
+        }
+    </ul>
+
+    <h2>Work Experience</h2>
+    <ul>
+        @foreach (var work in Model.WorkExperienceList)
+        {
+            <li>@work.Title at @work.CompanyName (from @work.StartDate to @work.EndDate)</li>
+        }
+    </ul>
+
+    <h2>Projects</h2>
+    <ul>
+        @foreach (var project in Model.ProjectsList)
+        {
+            <li>@project.Name - @project.Description</li>
+        }
+    </ul>
+
+    <h2>Certifications</h2>
+    <ul>
+        @foreach (var cert in Model.CertificationsList)
+        {
+            <li>@cert.Name (Issued by @cert.Issuer)</li>
+        }
+    </ul>
+
     @ViewData["Email"]
 </div>
