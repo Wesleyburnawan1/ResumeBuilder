@@ -134,9 +134,9 @@ public class HomeController : Controller
 
             if (isValidUserId)
             {
-                // Fetch the user based on the UserId from the database
                 var user = await _context.UserDetails
-                                         .FirstOrDefaultAsync(u => u.UserID == userId);
+                              .FirstOrDefaultAsync(u => u.UserID == userId && u.Visibility == true);
+
 
                 if (user == null)
                 {
@@ -268,10 +268,10 @@ public class HomeController : Controller
             var existingUser = _context.UserDetails.FirstOrDefault(u => u.UserID == userId);
             if (existingUser != null)
             {
-                // Update existing user details
                 existingUser.FirstName = userDetails.FirstName;
                 existingUser.LastName = userDetails.LastName;
                 existingUser.Address = userDetails.Address;
+                existingUser.Visibility = userDetails.Visibility;
             }
             else
             {
