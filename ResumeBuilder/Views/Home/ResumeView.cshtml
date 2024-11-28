@@ -1,11 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Resume View";
-}
+﻿
+@model ResumeViewModel
 @{
     Layout = null;
 }
-@model ResumeViewModel
-
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -23,101 +20,142 @@
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        width: 300px;
+        width: 80%;
+        max-width: 900px;
     }
 
     h2 {
         text-align: center;
         margin-bottom: 20px;
+        font-size: 28px;
+        color: #333;
     }
 
-    .input-group {
+    h1 {
+        text-align: center;
+        font-size: 24px;
         margin-bottom: 15px;
     }
 
-    label {
-        display: block;
-        margin-bottom: 5px;
+    .section {
+        margin-bottom: 30px;
     }
 
-    input {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
+    .section h3 {
+        font-size: 20px;
+        color: #007bff;
     }
 
-    button {
-        width: 100%;
-        padding: 10px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
+    ul {
+        list-style-type: none;
+        padding: 0;
     }
 
-        button:hover {
-            background-color: #0056b3;
-        }
-
-    .error-message {
-        color: red;
-        text-align: center;
-        margin-top: 10px;
+    li {
+        margin-bottom: 10px;
+        font-size: 16px;
     }
 
     .message {
         text-align: center;
         margin-top: 15px;
+        font-size: 16px;
+        color: green;
     }
+
+    .error-message {
+        color: red;
+        text-align: center;
+        margin-top: 10px;
+        font-size: 16px;
+    }
+
 </style>
+
 <div class="container">
-    <h2>Resume View</h2>
-    <h1>@Model.User.FirstName @Model.User.LastName 's Resume</h1>
-
+    <h1>@Model.User.FirstName @Model.User.LastName's Resume</h1>
+    
     <h2>Contact Information</h2>
-    <p>Address: @Model.User.Address</p>
+    <p><strong>Address:</strong> @Model.User.Address</p>
+    <p><strong>Email:</strong> @Model.UserEmail</p>  
 
-    <h2>Education</h2>
-    <ul>
-        @foreach (var education in Model.EducationList)
-        {
-            <li>@education.Degree - @education.InstituteName</li>
-        }
-    </ul>
+    <div class="section">
+        <h3>Education</h3>
+        <ul>
+            @foreach (var education in Model.EducationList)
+            {
+                <li>
+                    <strong>@education.Degree</strong> from @education.InstituteName (@education.StartingYear - @education.EndingYear)<br/>
+                    <strong>GPA:</strong> @education.GPA
+                </li>
+            }
+        </ul>
+    </div>
 
-    <h2>Skills</h2>
-    <ul>
-        @foreach (var skill in Model.SkillsList)
-        {
-            <li>@skill.Name</li>
-        }
-    </ul>
+    <div class="section">
+        <h3>Skills</h3>
+        <ul>
+            @foreach (var skill in Model.SkillsList)
+            {
+                <li>@skill.Name</li>
+            }
+        </ul>
+    </div>
 
-    <h2>Work Experience</h2>
-    <ul>
-        @foreach (var work in Model.WorkExperienceList)
-        {
-            <li>@work.Title at @work.CompanyName (from @work.StartDate to @work.EndDate)</li>
-        }
-    </ul>
+    <div class="section">
+        <h3>Work Experience</h3>
+        <ul>
+            @foreach (var work in Model.WorkExperienceList)
+            {
+                <li>
+                    <strong>@work.Title</strong> at @work.CompanyName (<em>@work.StartDate.ToString("MMM yyyy")</em> to <em>@work.EndDate.ToString("MMM yyyy")</em>)<br/>
+                    <p>@work.Description</p>
+                </li>
+            }
+        </ul>
+    </div>
 
-    <h2>Projects</h2>
-    <ul>
-        @foreach (var project in Model.ProjectsList)
-        {
-            <li>@project.Name - @project.Description</li>
-        }
-    </ul>
+    <div class="section">
+        <h3>Projects</h3>
+        <ul>
+            @foreach (var project in Model.ProjectsList)
+            {
+                <li>
+                    <strong>@project.Name</strong><br/>
+                    <em>@project.Role</em><br/>
+                    <p>@project.Description</p>
+                </li>
+            }
+        </ul>
+    </div>
 
-    <h2>Certifications</h2>
-    <ul>
-        @foreach (var cert in Model.CertificationsList)
-        {
-            <li>@cert.Name (Issued by @cert.Issuer)</li>
-        }
-    </ul>
+    <div class="section">
+        <h3>Certifications</h3>
+        <ul>
+            @foreach (var cert in Model.CertificationsList)
+            {
+                <li>
+                    <strong>@cert.Name</strong> (Issued by @cert.Issuer)
+                </li>
+            }
+        </ul>
+    </div>
 
-    @ViewData["Email"]
+    @if (ViewData["Message"] != null)
+    {
+        <div class="message">
+            <strong>@ViewData["Message"]</strong>
+        </div>
+    }
+
+    @if (ViewData["ErrorMessage"] != null)
+    {
+        <div class="error-message">
+            <strong>@ViewData["ErrorMessage"]</strong>
+        </div>
+    }
 </div>
+
+
+
+

@@ -1,3 +1,4 @@
+
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -135,8 +136,13 @@ public class HomeController : Controller
             if (isValidUserId)
             {
                 var user = await _context.UserDetails
-                              .FirstOrDefaultAsync(u => u.UserID == userId && u.Visibility == true);
-
+     .Where(ud => ud.UserID == userId && ud.Visibility == true)
+     .Select(ud => new
+     {
+         UserDetails = ud,
+         UserEmail = ud.User.Email // Access the email from the related Users table
+     })
+     .FirstOrDefaultAsync();
 
                 if (user == null)
                 {
@@ -146,35 +152,35 @@ public class HomeController : Controller
                 // Fetch related data using the UserId
                 var resumeViewModel = new ResumeViewModel
                 {
-                    User = user,
+
+                    User = user.UserDetails,
+                    UserEmail = user.UserEmail,  // The user's email
                     EducationList = await _context.Education
-                                                   .Where(e => e.UserID == user.UserID)
-                                                   .ToListAsync(),
-                    SkillsList = await _context.Skills
-                                               .Where(s => s.UserID == user.UserID)
+                                               .Where(e => e.UserID == user.UserDetails.UserID)
                                                .ToListAsync(),
+                    SkillsList = await _context.Skills
+                                           .Where(s => s.UserID == user.UserDetails.UserID)
+                                           .ToListAsync(),
                     WorkExperienceList = await _context.WorkExperience
-                                                       .Where(w => w.UserID == user.UserID)
-                                                       .ToListAsync(),
+                                                   .Where(w => w.UserID == user.UserDetails.UserID)
+                                                   .ToListAsync(),
                     ProjectsList = await _context.Projects
-                                                 .Where(p => p.UserID == user.UserID)
-                                                 .ToListAsync(),
+                                             .Where(p => p.UserID == user.UserDetails.UserID)
+                                             .ToListAsync(),
                     CertificationsList = await _context.Certifications
-                                                       .Where(c => c.UserID == user.UserID)
-                                                       .ToListAsync()
+                                                   .Where(c => c.UserID == user.UserDetails.UserID)
+                                                   .ToListAsync()
                 };
 
                 return View(resumeViewModel);
             }
             else
             {
-                // If the UserId is invalid or not a valid integer, return an error
                 return BadRequest("Invalid UserId parameter");
             }
         }
         else
         {
-            // If UserId is not found in the query string, return an error or redirect
             return BadRequest("UserId parameter is missing");
         }
     }
