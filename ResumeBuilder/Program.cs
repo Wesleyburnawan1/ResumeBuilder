@@ -12,7 +12,7 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
 });
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer("Server=tcp:resume-builder.database.windows.net,1433;Initial Catalog=resume-builder;Persist Security Info=False;User ID=wesley;Password=7hmX7V6g$B8Mf!V;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllersWithViews();
 // Add services to the container.
